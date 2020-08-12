@@ -36,14 +36,14 @@ or
 
 ## Build With
 ### Front-end
-* React - JavaScript library for building user interfaces or UI component.
-* Redux - JavaScript library for managing application state.
-* Material-UI - React components for faster and easier web development. 
+* React - User interface.
+* Redux - State management.
+* Material-UI - React components. 
 
 ### Back-end
-* Node.js - JavaScript runtime environment that executes JavaScript code outside a web browser.
-* Express - Web application framework for Node.js, designed for building web applications and APIs.
-* MongoDB - Cross-platform document-oriented database program. Classified as a NoSQL database program.
+* Node.js - JavaScript runtime environment.
+* Express - Web application framework for Node.js.
+* MongoDB - NoSQL database.
 
 ## Author
 * <b>Angel Todorov</b>

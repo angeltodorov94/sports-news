@@ -26,7 +26,7 @@ or
 
 > npm install
 
-
+<br />
 To start the project run
 > yarn start
 
@@ -41,10 +41,9 @@ or
 * Material-UI - React components for faster and easier web development. 
 
 ### Back-end
-REST API
-* Node.js
-* Express 
-* MongoDB
+* Node.js - JavaScript runtime environment that executes JavaScript code outside a web browser.
+* Express - Web application framework for Node.js, designed for building web applications and APIs.
+* MongoDB - Cross-platform document-oriented database program. Classified as a NoSQL database program.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

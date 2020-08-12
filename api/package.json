@@ -5,7 +5,7 @@
   "author": "Angel Todorov",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

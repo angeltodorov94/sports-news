@@ -1,6 +1,7 @@
 # Sports News
 
 Web Application where users can browse all kind of sports news. 
+This single-page application is build with React as front-end and is communicating with a RESTful API build with Node.js/Express.
 
 * Guest Users have access to:
     * Home Page
@@ -43,6 +44,9 @@ or
 * Node.js - JavaScript runtime environment that executes JavaScript code outside a web browser.
 * Express - Web application framework for Node.js, designed for building web applications and APIs.
 * MongoDB - Cross-platform document-oriented database program. Classified as a NoSQL database program.
+
+## Author
+* <b>Angel Todorov</b>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -21,12 +21,16 @@ Web Application where users can browse all kind of sports news.
 
 Run
 > yarn install
+
 or
+
 > npm install
 
 To start the project run
 > yarn start
+
 or
+
 > npm start
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

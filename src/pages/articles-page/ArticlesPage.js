@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PageLayout from '../PageLayout'
+import Loading from '../../components/loading/Loading'
 import { getRecentNews } from '../../store/actions/index'
 import HorizontalCard from '../../components/card/HorizontalCard'
 
@@ -8,6 +9,7 @@ const ArticlesPage = (props) => {
     const dispatch = useDispatch()
     const search = props.location.search
     const data = useSelector(state => state.articles.articles.data)
+    const loading = useSelector(state => state.articles.articles.loading)
 
     useEffect(() => {
         dispatch(getRecentNews(search))
@@ -19,7 +21,7 @@ const ArticlesPage = (props) => {
 
     return (
         <PageLayout>
-            {renderCards(data)}
+            {loading ? <Loading /> : renderCards(data)}
         </PageLayout>
     )
 }

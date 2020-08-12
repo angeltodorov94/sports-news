@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PageLayout from '../PageLayout'
 import Typography from '../../components/titles/Typography'
 import Loading from '../../components/loading/Loading'
+import Error from '../../components/errorMessages/Error'
 import CommentsButton from '../../components/commentsButton/CommentsButton'
 import Top from './top/Top'
 import Image from '../../components/imagesCloudinary/Image'
@@ -15,6 +16,8 @@ import { getArticle, changeToggle, cleanArticleState } from '../../store/actions
 const ArticlePage = (props) => {
     const params = useParams()
     const data = useSelector(state => state.article.data)
+    const loading = useSelector(state => state.article.loading)
+    const error = useSelector(state => state.article.error)
     const isAuth = useSelector(state => state.auth.token !== null)
     const toggle = useSelector(state => state.article.toggle)
     const update = useSelector(state => state.article.update)
@@ -32,19 +35,20 @@ const ArticlePage = (props) => {
 
     return (
         <PageLayout>
-            {data === null ? <Loading /> :
-                <Fragment>
-                    <Top text={data.category} />
-                    <Typography type='h2' text={data.title} />
-                    <Image imageUrl={data.imageUrl} />
-                    <Content data={data} />
-                    {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
-                    {toggle ?
-                        <Fragment>
-                            <PostComment />
-                            <CommentSection comments={data.comments} />
-                        </Fragment> : null}
-                </Fragment>}
+            {loading ? <Loading /> : null}
+            {(data === null || error) ? <Error error='Something went wrong!' /> : null}
+            <Fragment>
+                <Top text={data.category} />
+                <Typography type='h2' text={data.title} />
+                <Image imageUrl={data.imageUrl} />
+                <Content data={data} />
+                {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
+                {toggle ?
+                    <Fragment>
+                        <PostComment />
+                        <CommentSection comments={data.comments} />
+                    </Fragment> : null}
+            </Fragment>
         </PageLayout>
     )
 }

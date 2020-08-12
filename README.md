@@ -1,3 +1,34 @@
+# Sports News
+
+Web Application where users can browse all kind of sports news. 
+
+* Guest Users have access to:
+    * Home Page
+    * Browse Page
+    * Artical Page
+    * Login Page
+    * Register Page
+* Registered Users have additional access to:
+    * Profile Page
+    * Managing their account
+    * Reading and posting comments on the articles
+    * Mark an article as favorite
+* Admins can:
+    * Create a new article
+    * Managing users and articles
+
+## Installation and Running
+
+Run
+> yarn install
+or
+> npm install
+
+To start the project run
+> yarn start
+or
+> npm start
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

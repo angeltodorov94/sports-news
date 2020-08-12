@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes'
-import { getUserInformationSuccess } from './index'
 
 export const getArticle = (id) => {
     return (dispatch, getState) => {

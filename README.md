@@ -19,15 +19,14 @@ Web Application where users can browse all kind of sports news.
 
 ## Installation and Running
 
-Run
+#### Run
 > yarn install
 
 or
 
 > npm install
 
-<br />
-To start the project run
+#### To start the project run
 > yarn start
 
 or

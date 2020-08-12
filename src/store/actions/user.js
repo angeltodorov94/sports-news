@@ -13,6 +13,19 @@ export const getUserInformation = id => {
     }
 }
 
+export const getAllUsersInformation = () => {
+    return dispatch => {
+        dispatch(getAllUsersInformationStart())
+        fetch('http://localhost:9999/api/user/')
+            .then(response => {
+                if (response.status >= 400) throw new Error("Something Went Wrong!")
+                return response.json()
+            })
+            .then(response => dispatch(getAllUsersInformationSuccess(response)))
+            .catch(err => dispatch(getAllUsersInformationFailed(err.message)))
+    }
+}
+
 export const updateUserInformation = (id, data) => {
     return dispatch => {
         dispatch(getUserInformationStart())
@@ -46,6 +59,12 @@ const getUserInformationStart = () => {
     }
 }
 
+const getAllUsersInformationStart = () => {
+    return {
+        type: actionTypes.GET_ALL_USERS_INFO_START
+    }
+}
+
 export const getUserInformationSuccess = (dataObj) => {
     return {
         type: actionTypes.GET_USER_INFO_SUCCESS,
@@ -59,9 +78,23 @@ export const getUserInformationSuccess = (dataObj) => {
     }
 }
 
+const getAllUsersInformationSuccess = (dataObj) => {
+    return {
+        type: actionTypes.GET_ALL_USERS_INFO_SUCCESS,
+        allUsers: dataObj
+    }
+}
+
 const getUserInformationFailed = (err) => {
     return {
         type: actionTypes.GET_USER_INFO_FAILED,
+        err
+    }
+}
+
+const getAllUsersInformationFailed = (err) => {
+    return {
+        type: actionTypes.GET_ALL_USERS_INFO_FAILED,
         err
     }
 }

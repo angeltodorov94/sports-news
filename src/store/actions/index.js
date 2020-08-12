@@ -7,6 +7,7 @@ export {
     getUserInformation,
     getUserInformationSuccess,
     updateUserInformation,
+    getAllUsersInformation,
     deleteUser
 } from './user'
 export {

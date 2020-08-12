@@ -39,8 +39,8 @@ const ProfilePage = (props) => {
                     <Tab label="Profile Info" />
                     <Tab label="Liked Pages" />
                     <Tab label="Security" />
-                    {isAdmin ? <Tab label="Articles" /> : null}
                     {isAdmin ? <Tab label="Users" /> : null}
+                    {isAdmin ? <Tab label="Articles" /> : null}
                     {isAdmin ? <Tab label="Archives" /> : null}
                 </Tabs>
             </AppBar>

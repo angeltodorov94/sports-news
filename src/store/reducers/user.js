@@ -2,12 +2,14 @@ import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
     userDetails: null,
+    allUsers: null,
     loading: false,
     error: null
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.GET_ALL_USERS_INFO_START:
         case actionTypes.GET_USER_INFO_START:
             return {
                 ...state,
@@ -21,6 +23,14 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: null
             }
+        case actionTypes.GET_ALL_USERS_INFO_SUCCESS:
+            return {
+                ...state,
+                allUsers: action.allUsers,
+                loading: false,
+                error: null
+            }
+        case actionTypes.GET_ALL_USERS_INFO_FAILED:
         case actionTypes.GET_USER_INFO_FAILED:
             return {
                 ...state,

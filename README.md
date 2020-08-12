@@ -26,12 +26,25 @@ or
 
 > npm install
 
+
 To start the project run
 > yarn start
 
 or
 
 > npm start
+
+## Build With
+### Front-end
+* React - JavaScript library for building user interfaces or UI component.
+* Redux - JavaScript library for managing application state.
+* Material-UI - React components for faster and easier web development. 
+
+### Back-end
+REST API
+* Node.js
+* Express 
+* MongoDB
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

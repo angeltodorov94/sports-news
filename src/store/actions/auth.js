@@ -37,8 +37,9 @@ export const authenticationInit = (email, password, action) => {
 export const logout = () => {
     localStorage.removeItem('x-auth-token')
     localStorage.removeItem('expiration-date')
-    return {
-        type: actionTypes.AUTH_LOGOUT
+    return dispatch => {
+        dispatch(actionLogout())
+        dispatch(cleanUserInfo())
     }
 }
 
@@ -102,5 +103,17 @@ const checkAuthTimeout = (expirationTime) => {
 const removeError = () => {
     return {
         type: actionTypes.REMOVE_ERROR
+    }
+}
+
+const actionLogout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+const cleanUserInfo = () => {
+    return {
+        type: actionTypes.CLEAN_USER_INFO
     }
 }

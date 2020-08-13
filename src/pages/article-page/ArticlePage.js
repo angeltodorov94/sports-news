@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect, Fragment, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import PageLayout from '../PageLayout'
@@ -35,20 +35,19 @@ const ArticlePage = (props) => {
 
     return (
         <PageLayout>
-            {loading ? <Loading /> : null}
-            {(data === null || error) ? <Error error='Something went wrong!' /> : null}
-            <Fragment>
-                <Top text={data.category} />
-                <Typography type='h2' text={data.title} />
-                <Image imageUrl={data.imageUrl} />
-                <Content data={data} />
-                {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
-                {toggle ?
-                    <Fragment>
-                        <PostComment />
-                        <CommentSection comments={data.comments} />
-                    </Fragment> : null}
-            </Fragment>
+            {(loading || data === null) ? <Loading /> :
+                <Fragment>
+                    <Top text={data.category} />
+                    <Typography type='h2' text={data.title} />
+                    <Image imageUrl={data.imageUrl} />
+                    <Content data={data} />
+                    {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
+                    {toggle ?
+                        <Fragment>
+                            <PostComment />
+                            <CommentSection comments={data.comments} />
+                        </Fragment> : null}
+                </Fragment>}
         </PageLayout>
     )
 }

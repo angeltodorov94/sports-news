@@ -11,16 +11,14 @@ export {
     deleteUser
 } from './user'
 export {
-    createArticle
-} from './admin'
-export {
     getTopNews,
     getRecentNews
 } from './articles'
 export {
     getArticle,
     changeToggle,
-    cleanArticleState
+    cleanArticleState,
+    createArticle
 } from './article'
 export {
     postComment,

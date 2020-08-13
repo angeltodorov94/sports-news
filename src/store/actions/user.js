@@ -47,7 +47,7 @@ export const updateUserInformation = (id, data) => {
 export const deleteUser = (id) => {
     return dispatch => {
         fetch(`http://localhost:9999/api/user/${id}`, { method: "DELETE" })
-            .then(response => dispatch(cleanUserInfo()))
+            .catch(err => 'Something went wrong!')
     }
 }
 
@@ -96,12 +96,6 @@ const getAllUsersInformationFailed = (err) => {
     return {
         type: actionTypes.GET_ALL_USERS_INFO_FAILED,
         err
-    }
-}
-
-const cleanUserInfo = () => {
-    return {
-        type: actionTypes.CLEAN_USER_INFO
     }
 }
 

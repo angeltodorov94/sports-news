@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
@@ -6,19 +6,32 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
+import Link from '@material-ui/core/Link'
 import Paper from '@material-ui/core/Paper'
 import Loading from '../../../../components/loading/Loading'
 import Typography from '../../../../components/titles/Typography'
-import { getAllUsersInformation } from '../../../../store/actions/index'
+import { getAllUsersInformation, deleteUser, updateUserInformation } from '../../../../store/actions/index'
 
 const UsersManagement = (props) => {
     const dispatch = useDispatch()
     const data = useSelector(state => state.user.allUsers)
     const loading = useSelector(state => state.user.loading)
+    const [change, setChange] = useState(false)
 
     useEffect(() => {
         dispatch(getAllUsersInformation())
-    }, [dispatch])
+    }, [dispatch, change])
+
+    const deleteHandler = id => {
+        dispatch(deleteUser(id))
+        setChange(!change)
+    }
+
+    const changeAdminStatus = (id, isAdmin) => {
+        const obj = isAdmin ? { isAdmin: false } : { isAdmin: true }
+        dispatch(updateUserInformation(id, obj))
+        setChange(!change)
+    }
 
     const renderTable = () => {
         return (
@@ -26,11 +39,10 @@ const UsersManagement = (props) => {
                 <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Email</TableCell>
-                            {/* <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+                            <TableCell align='center'>Email</TableCell>
+                            <TableCell align="center">isAdmin</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -39,10 +51,15 @@ const UsersManagement = (props) => {
                                 <TableCell>
                                     {user.email}
                                 </TableCell>
-                                {/* <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell> */}
+                                <TableCell align="center">{user.isAdmin ? 'yes' : 'no'}</TableCell>
+                                <TableCell align="center">
+                                    <Link component="button" variant="body2"
+                                        onClick={() => changeAdminStatus(user._id, user.isAdmin)}>{user.isAdmin ? "Demote" : "Promote"}</Link>
+                                </TableCell>
+                                <TableCell align="center">
+                                    <Link component="button" variant="body2" color="secondary"
+                                        onClick={() => deleteHandler(user._id)}>Delete</Link>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

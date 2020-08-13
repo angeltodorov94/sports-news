@@ -6,7 +6,7 @@ import Button from '../../../../../components/button/Button'
 import { useDispatch, useSelector } from "react-redux"
 import { deleteUser, logout } from "../../../../../store/actions/index"
 
-const Component = (props) => {
+const DeleteAccount = (props) => {
     const [deleteInput, setDeleteInput] = useState('')
     const [deleteError, setDeleteError] = useState(null)
 
@@ -34,4 +34,4 @@ const Component = (props) => {
     )
 }
 
-export default Component
+export default DeleteAccount

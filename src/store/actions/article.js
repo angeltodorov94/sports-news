@@ -1,8 +1,10 @@
 import * as actionTypes from './actionTypes'
 
-export const getArticle = (id) => {
+export const getArticle = id => {
     return (dispatch, getState) => {
-        dispatch(getArticleStart())
+        if (getState().article.data === null)
+            dispatch(getArticleStart())
+
         fetch(`http://localhost:9999/api/article/${id}`, { method: 'GET' })
             .then(response => response.json())
             .then(response => dispatch(getArticleSuccess(response)))
@@ -19,6 +21,17 @@ export const changeToggle = () => {
 export const cleanArticleState = () => {
     return {
         type: actionTypes.CLEAN_ARTICLE
+    }
+}
+
+export const createArticle = data => {
+    return dispatch => {
+        fetch('http://localhost:9999/api/article', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(response => response.json())
+            .catch(err => console.error(err))
     }
 }
 

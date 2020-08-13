@@ -1,6 +1,6 @@
 # Sports News
 
-Web Application where users can browse all kind of sports news. 
+Web Application where users can browse all kinds of sports news. 
 This single-page application is build with React as front-end and is communicating with a RESTful API build with Node.js/Express.
 
 * Guest Users have access to:

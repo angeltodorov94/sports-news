@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import Box from '@material-ui/core/Box'
 import Typography from '../../../../../components/titles/Typography'
 import Input from '../../../../../components/input/Input'
-import Button from '../../../../../components/button/Button'
+import Button from '../../../../../components/buttons/Button'
 import { validation } from '../../../../../utils/form-validations'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserInformation } from "../../../../../store/actions/index"
@@ -13,7 +13,6 @@ const ChangeEmail = (props) => {
 
     const id = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const onBlurHandler = (e) => {
         const errorResult = validation('email', e.target.value)
@@ -24,18 +23,17 @@ const ChangeEmail = (props) => {
         if (errorEmail !== null) return
 
         dispatch(updateUserInformation(id, { email }))
-        // history.push('/profile')
     }
 
     return (
-        <div>
-            <Typography type='h4' text="Change Email" />
+        <Box>
+            <Typography type='h6' text="Change Email" />
             <Input type="email" text="New Email" name="email" value={email} error={errorEmail}
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={(e) => onBlurHandler(e)}
             />
             <Button type="submit" text="Change Email" onClick={onClickHandler} />
-        </div>
+        </Box>
     )
 }
 

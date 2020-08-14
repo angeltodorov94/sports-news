@@ -41,7 +41,6 @@ const ProfilePage = (props) => {
                     <Tab label="Security" />
                     {isAdmin ? <Tab label="Users" /> : null}
                     {isAdmin ? <Tab label="Articles" /> : null}
-                    {isAdmin ? <Tab label="Archives" /> : null}
                 </Tabs>
             </AppBar>
             <TabPanels value={value} data={userDetails} />

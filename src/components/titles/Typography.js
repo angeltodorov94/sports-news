@@ -3,10 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-    h2: {
-        color: '#273c75',
-    },
-    h4: {
+    header: {
         color: '#273c75',
     },
     body: {
@@ -23,7 +20,7 @@ const Types = (props) => {
                 variant='h2'
                 align={props.position}
                 paragraph
-                className={classes.h2}
+                className={classes.header}
             >
                 {props.text ? props.text : props.children}
             </Typography>
@@ -32,7 +29,16 @@ const Types = (props) => {
                 variant='h4'
                 align={props.position}
                 paragraph
-                className={classes.h2}
+                className={classes.header}
+            >
+                {props.text ? props.text : props.children}
+            </Typography>
+        case 'h6':
+            return <Typography
+                variant='h6'
+                align={props.position}
+                paragraph
+                className={classes.header}
             >
                 {props.text ? props.text : props.children}
             </Typography>

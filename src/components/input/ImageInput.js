@@ -5,7 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     input: {
-        display: 'none',
+        display: 'none'
+    },
+    button: {
+        marginBottom: theme.spacing(2)
     }
 }))
 
@@ -24,7 +27,7 @@ const ImageInput = ({ name, onChange, value }) => {
                 onChange={onChange}
             />
             <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">Upload Image</Button>
+                <Button variant="contained" color="primary" component="span" className={classes.button} disableElevation>Upload Image</Button>
             </label>
             <span>{value}</span>
         </Fragment>

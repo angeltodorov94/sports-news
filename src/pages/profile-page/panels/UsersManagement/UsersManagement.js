@@ -70,7 +70,7 @@ const UsersManagement = (props) => {
 
     return (
         <Fragment>
-            <Typography type='h2' position='center' text='Users Management' />
+            <Typography type='h4' position='center' text='User Management' />
             {(data === null || loading) ? <Loading /> : renderTable()}
         </Fragment>
     )

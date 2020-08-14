@@ -1,19 +1,17 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 export const postComment = (content, articleId, userId) => {
     return dispatch => {
-        fetch('http://localhost:9999/api/comment/', {
-            method: "POST",
-            body: JSON.stringify({ content, articleId, userId }),
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => dispatch(articleUpdate()))
+        axios.post('/comment', { content, articleId, userId })
+            .then(response => dispatch(articleUpdate()))
     }
 }
 
 export const deleteComment = id => {
     return dispatch => {
-        fetch(`http://localhost:9999/api/comment/${id}`, { method: "DELETE" })
-            .then(response => dispatch(articleUpdate()))
+        axios.delete(`/comment/${id}`)
+            .then(() => dispatch(articleUpdate()))
     }
 }
 

@@ -1,13 +1,13 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 export const getArticle = id => {
     return (dispatch, getState) => {
         if (getState().article.data === null)
             dispatch(getArticleStart())
 
-        fetch(`http://localhost:9999/api/article/${id}`, { method: 'GET' })
-            .then(response => response.json())
-            .then(response => dispatch(getArticleSuccess(response)))
+        axios.get(`/article/${id}`)
+            .then(response => dispatch(getArticleSuccess(response.data)))
             .catch(err => dispatch(getArticleError()))
     }
 }
@@ -26,12 +26,10 @@ export const cleanArticleState = () => {
 
 export const createArticle = data => {
     return dispatch => {
-        fetch('http://localhost:9999/api/article', {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => response.json())
-            .catch(err => console.error(err))
+        dispatch(postArticleStart())
+        axios.post('/article', data)
+            .then(() => dispatch(postArticleSuccess))
+            .catch(err => dispatch(postArticleFailed('Something went wrong!')))
     }
 }
 
@@ -54,5 +52,24 @@ const getArticleError = () => {
     return {
         type: actionTypes.GET_ARTICLE_FAILED,
         err: "Something Went Wrong!"
+    }
+}
+
+const postArticleStart = () => {
+    return {
+        type: actionTypes.POST_ARTICLE_START
+    }
+}
+
+const postArticleSuccess = () => {
+    return {
+        type: actionTypes.POST_ARTICLE_SUCCESS
+    }
+}
+
+const postArticleFailed = err => {
+    return {
+        type: actionTypes.POST_ARTICLE_FAILED,
+        err
     }
 }

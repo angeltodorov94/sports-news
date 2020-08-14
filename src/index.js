@@ -6,11 +6,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
+import axios from 'axios'
 
 import auth from './store/reducers/auth'
 import user from './store/reducers/user'
 import article from './store/reducers/article'
 import articles from './store/reducers/articles'
+
+axios.defaults.baseURL = 'http://localhost:9999/api'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -20,7 +24,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
-));
+))
 
 ReactDOM.render(
   <Provider store={store}>

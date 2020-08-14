@@ -1,5 +1,6 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import Box from '@material-ui/core/Box'
 import Link from '@material-ui/core/Link'
 import Typography from '../../../components/titles/Typography'
 import Loading from '../../../components/loading/Loading'
@@ -20,13 +21,13 @@ const RecentNews = (props) => {
     }
 
     return (
-        <Fragment>
+        <Box>
             <Typography type='h2' text="Recent News" />
-            <div>
+            <Box>
                 {data.length === 0 ? <Loading /> : renderCards(data)}
-            </div>
+            </Box>
             <Typography type='body' position='right' text={<Link to="/browse" component={RouterLink} align='right'>See more</Link>} />
-        </Fragment>
+        </Box>
     )
 }
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import TextArea from '../../../components/textarea/TextArea'
-import Button from '../../../components/button/Button'
+import Button from '../../../components/buttons/Button'
 import { validation } from '../../../utils/form-validations'
 import { postComment } from '../../../store/actions/index'
 

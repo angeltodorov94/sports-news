@@ -6,7 +6,6 @@ import LikedPages from './LikedPages/LikedPages'
 import Security from './SecurityPanel/Security'
 import UsersManagement from './UsersManagement/UsersManagement'
 import ArticlesManagement from './ArticlesManagement/ArticlesManagement'
-import Archives from './ArchiveArticles/Archives'
 
 const TabPanels = ({ value, data }) => {
     return (
@@ -25,9 +24,6 @@ const TabPanels = ({ value, data }) => {
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <ArticlesManagement />
-            </TabPanel>
-            <TabPanel value={value} index={5}>
-                <Archives />
             </TabPanel>
         </Fragment>
     )

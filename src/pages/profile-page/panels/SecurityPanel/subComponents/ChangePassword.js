@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import Box from '@material-ui/core/Box'
 import Typography from '../../../../../components/titles/Typography'
 import Input from '../../../../../components/input/Input'
-import Button from '../../../../../components/button/Button'
+import Button from '../../../../../components/buttons/Button'
 import { validation } from '../../../../../utils/form-validations'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserInformation } from "../../../../../store/actions/index"
@@ -15,7 +15,6 @@ const ChangePassword = (props) => {
 
     const id = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const onBlurHandler = (e) => {
         const errorResult = validation(e.target.name, e.target.value)
@@ -32,12 +31,11 @@ const ChangePassword = (props) => {
             return
         }
         dispatch(updateUserInformation(id, { password }))
-        // history.push('/profile')
     }
 
     return (
-        <div>
-            <Typography type='h4' text="Change Password" />
+        <Box>
+            <Typography type='h6' text="Change Password" />
             <Input type="password" text="New Password" name="password" value={password} error={errorPassword}
                 onChange={e => setPassword(e.target.value)}
                 onBlur={e => onBlurHandler(e)}
@@ -47,7 +45,7 @@ const ChangePassword = (props) => {
                 onBlur={e => onBlurHandler(e)}
             />
             <Button type="submit" text="Change Password" onClick={onClickHandler} />
-        </div>
+        </Box>
     )
 }
 

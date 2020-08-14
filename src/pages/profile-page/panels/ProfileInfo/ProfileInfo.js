@@ -2,8 +2,8 @@ import React, { Fragment } from 'react'
 import Typography from '../../../../components/titles/Typography'
 import Grid from '@material-ui/core/Grid'
 import Loading from '../../../../components/loading/Loading'
+import Info from '../../../../components/messages/Info'
 import Card from '../../../../components/card/Card'
-
 import ProfileImage from './ProfileImage/ProfileImage'
 
 const ProfileInfo = ({ data }) => {
@@ -19,19 +19,19 @@ const ProfileInfo = ({ data }) => {
 
     return (
         <Fragment>
-            <Typography type='h2' position='center' text='Profile Info' />
+            <Typography type='h4' position='center' text='Profile Info' />
             <Grid container spacing={3}>
                 <ProfileImage image={data.profilePicture} />
                 <Grid item xs={6}>
                     <p>Email: {data.email}</p>
                     <p>Liked Articles: {data.savedArticles.length}</p>
                     <p>Posted Comments: {data.postedComments.length}</p>
-                    {/* <p>Username: {data.username}</p> */}
                 </Grid>
             </Grid>
-            <Typography type='h4' text="Latest liked articles" />
+            <Typography type='h4' text="Latest liked articles" position='center' />
+            {data.savedArticles.length === 0 ? <Info text='There is no liked articles yet!' /> : null}
             <Grid container spacing={3}>
-                {data.savedArticles.length === 0 ? <p>There is no liked articles yet!</p> : renderCards(data.savedArticles)}
+                {data.savedArticles.length > 0 ? renderCards(data.savedArticles) : null}
             </Grid>
         </Fragment>
     )

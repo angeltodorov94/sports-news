@@ -1,16 +1,23 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
-import Image from '../imagesCloudinary/Image'
+import Link from '@material-ui/core/Link'
+import { Link as RouterLink } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import Image from '../imagesCloudinary/Image'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    }
+    content: {
+        height: '60px',
+    },
+    link: {
+        display: 'block',
+        textOverflow: 'ellipsis',
+        wordWrap: 'break-word',
+        overflow: 'hidden',
+        maxHeight: '60px',
+    },
 }))
 
 const CardComponent = (props) => {
@@ -20,8 +27,8 @@ const CardComponent = (props) => {
         <Grid item xs={6} sm={3}>
             <Card>
                 <Image imageUrl={props.imageUrl} />
-                <CardContent>
-                    <Link to={`/articles/${props.id}`}>{props.title}</Link>
+                <CardContent className={classes.content}>
+                    <Link component={RouterLink} to={`/articles/${props.id}`} underline='none' className={classes.link}>{props.title}</Link>
                 </CardContent>
             </Card>
         </Grid>

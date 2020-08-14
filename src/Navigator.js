@@ -13,8 +13,9 @@ import RegisterPage from './pages/register-page/RegisterPage'
 import LogoutPage from './pages/logout-page/LogoutPage'
 import ProfilePage from './pages/profile-page/ProfilePage'
 import ArticlePage from './pages/article-page/ArticlePage'
-import ArticlesPage from './pages/articles-page/ArticlesPage'
+import ArticlesPage from './pages/browse-page/BrowsePage'
 import CreateArticlePage from './pages/create-article/CreateArticle'
+import ErrorPage from './pages/404/Page404'
 
 import { checkAuthenticationStatus } from './store/actions/index'
 import { useSelector, useDispatch } from 'react-redux'
@@ -31,19 +32,25 @@ const Navigator = () => {
   return (
     <BrowserRouter>
       <Switch>
-        {/* Public Routes */}
         <Route path="/" exact component={HomePage} />
         <Route path="/browse" component={ArticlesPage} />
         <Route path="/articles/:id" component={ArticlePage} />
-        {/* Guest Routes */}
-        {!isAuth ? <Route path="/login" component={LoginPage} /> : null}
-        {!isAuth ? <Route path="/register" component={RegisterPage} /> : null}
-        {/* Logged In Users Routes */}
-        {isAuth ? <Route path="/profile" component={ProfilePage} /> : null}
-        {isAuth ? <Route path="/logout" component={LogoutPage} /> : null}
-        {/* Admin Pages */}
-        {isAdmin ? <Route path="/create-article" component={CreateArticlePage} /> : null}
-        <Redirect to='/' />
+        <Route path='/login'>
+          {!isAuth ? <LoginPage /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/register'>
+          {!isAuth ? <RegisterPage /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/profile'>
+          {isAuth ? <ProfilePage /> : <Redirect to='/login' />}
+        </Route>
+        <Route path='/logout'>
+          {isAuth ? <LogoutPage /> : <Redirect to='/login' />}
+        </Route>
+        <Route path='/create-article'>
+          {isAdmin ? <CreateArticlePage /> : <Redirect to='/' />}
+        </Route>
+        <Route to='*' component={ErrorPage} />
       </Switch>
     </BrowserRouter>
   )

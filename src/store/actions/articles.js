@@ -1,11 +1,11 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 export const getTopNews = () => {
     return dispatch => {
         dispatch(getTopNewsStart())
-        fetch('http://localhost:9999/api/article?limit=4&sortBy=clicks', { method: 'GET' })
-            .then(response => response.json())
-            .then(response => dispatch(getTopNewsSuccess(response)))
+        axios.get('/article?limit=4&sortBy=clicks')
+            .then(response => dispatch(getTopNewsSuccess(response.data)))
             .catch(err => dispatch(getTopNewsError()))
     }
 }
@@ -14,9 +14,8 @@ export const getRecentNews = (filter) => {
     const category = filter || ''
     return dispatch => {
         dispatch(getRecentNewsStart())
-        fetch(`http://localhost:9999/api/article${category}`, { method: 'GET' })
-            .then(response => response.json())
-            .then(response => dispatch(getRecentNewsSuccess(response)))
+        axios.get(`/article${category}`)
+            .then(response => dispatch(getRecentNewsSuccess(response.data)))
             .catch(err => dispatch(getRecentNewsError()))
     }
 }

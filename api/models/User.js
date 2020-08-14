@@ -47,7 +47,6 @@ UserSchema.pre('save', function (next) {
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(this.password, salt, (err, hash) => {
                 if (err) { next(err); return }
-                console.log(hash)
                 this.password = hash
                 next()
             })

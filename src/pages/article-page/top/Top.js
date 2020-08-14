@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import Grid from '@material-ui/core/Grid'
 import Category from './category/Category'
 import SaveIcon from './saveIcon/SaveIcon'
 import { useSelector } from 'react-redux'
@@ -8,16 +8,11 @@ const Top = ({ text }) => {
     const isAuth = useSelector(state => state.auth.token !== null)
 
     return (
-        <Container>
+        <Grid container justify='space-between'>
             <Category text={text} />
             {isAuth === true ? <SaveIcon /> : null}
-        </Container>
+        </Grid>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
 
 export default Top

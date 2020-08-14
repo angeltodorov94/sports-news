@@ -1,9 +1,19 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+    textarea: {
+        marginBottom: theme.spacing(2)
+    }
+}))
 
 const TextArea = ({ text, name, value, error, onChange, onBlur }) => {
+    const classes = useStyles()
+
     return (
         <TextField
+            className={classes.textarea}
             label={text}
             name={name}
             value={value}
@@ -14,7 +24,7 @@ const TextArea = ({ text, name, value, error, onChange, onBlur }) => {
             variant="outlined"
             required
             fullWidth
-            margin='normal'
+            margin='none'
             multiline
             rows={5}
         />

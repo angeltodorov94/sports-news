@@ -13,7 +13,6 @@ const ArticleSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        match: [/^(http:\/\/|https:\/\/)/, 'Image URL is not valid!'],
         required: true
     },
     author: {

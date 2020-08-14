@@ -9,7 +9,6 @@ module.exports = {
             const obj = { $inc: { clicks: 1 } }
             models.Article.findByIdAndUpdate(req.params.id, obj, { new: true }).populate({ path: 'comments', populate: { path: 'author', model: 'User' } })
                 .then((article) => {
-                    console.log(article)
                     res.send(article)
                 })
                 .catch(next)

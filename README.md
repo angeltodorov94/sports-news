@@ -16,7 +16,7 @@ This single-page application is build with React as front-end and is communicati
     * Mark an article as favorite
 * Admins can:
     * Create a new article
-    * Managing users and articles
+    * Manage users and articles
 
 ## Installation and Running
 

@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1.5)
     },
     delete: {
-        color: '#c23616',
+        color: theme.palette.error.main,
         display: 'block',
         marginLeft: 'auto',
-        marginRight: theme.spacing(1)
+        marginRight: theme.spacing(0)
     }
 }))
 

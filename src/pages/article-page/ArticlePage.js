@@ -1,10 +1,11 @@
-import React, { useEffect, Fragment, useMemo } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import Box from '@material-ui/core/Box'
 import PageLayout from '../PageLayout'
 import Typography from '../../components/titles/Typography'
 import Loading from '../../components/loading/Loading'
-import Error from '../../components/errorMessages/Error'
+import Error from '../../components/messages/Error'
 import CommentsButton from '../../components/commentsButton/CommentsButton'
 import Top from './top/Top'
 import Image from '../../components/imagesCloudinary/Image'
@@ -39,7 +40,9 @@ const ArticlePage = (props) => {
                 <Fragment>
                     <Top text={data.category} />
                     <Typography type='h2' text={data.title} />
-                    <Image imageUrl={data.imageUrl} />
+                    <Box mb={2}>
+                        <Image imageUrl={data.imageUrl} />
+                    </Box>
                     <Content data={data} />
                     {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
                     {toggle ?

@@ -1,24 +1,17 @@
 import React from 'react'
-import styled from 'styled-components'
-
+import Grid from '@material-ui/core/Grid'
 import Logo from './logo/Logo'
 import User from './user/User'
+import { useSelector } from 'react-redux'
 
 const Header = (props) => {
+    const loading = useSelector(state => state.auth.loading)
     return (
-        <Nav>
+        <Grid container justify='space-between'>
             <Logo />
-            <User />
-        </Nav>
+            {!loading ? <User /> : null}
+        </Grid>
     )
 }
-
-const Nav = styled.nav`
-    display: flex;
-    justify-content: space-between;
-    background-color: #f5f6fa;
-    height: 64px;
-    border-bottom: 5px #273c75 solid;
-`
 
 export default Header

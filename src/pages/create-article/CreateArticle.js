@@ -5,7 +5,7 @@ import Input from '../../components/input/Input'
 import ImageInput from '../../components/input/ImageInput'
 import TextArea from '../../components/textarea/TextArea'
 import Select from '../../components/select/Select'
-import Button from '../../components/button/Button'
+import Button from '../../components/buttons/Button'
 import Container from '@material-ui/core/Container'
 import { validation, checkValidity } from '../../utils/form-validations'
 import imageUpload from '../../utils/imageUpload'
@@ -42,8 +42,6 @@ class CreateArticle extends Component {
 
     onChangeHandler = (e) => {
         this.setState({ [e.target.name]: { value: e.target.value } })
-        console.log(this.state)
-
     }
 
     onSelectChangeHandler = (e) => {

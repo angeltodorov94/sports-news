@@ -4,7 +4,7 @@ const initialState = {
     token: null,
     id: null,
     isAdmin: null,
-    loading: false,
+    loading: true,
     error: null
 }
 
@@ -33,8 +33,8 @@ const reducer = (state = initialState, action) => {
             }
         case actionTypes.AUTH_LOGOUT:
             return {
-                ...state,
-                ...initialState
+                ...initialState,
+                loading: false
             }
         case actionTypes.REMOVE_ERROR:
             return {

@@ -6,6 +6,8 @@ const initialState = {
     error: null,
     toggle: false,
     update: false,
+    postLoading: false,
+    postError: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -43,6 +45,26 @@ const reducer = (state = initialState, action) => {
             return {
                 ...initialState
             }
+        case actionTypes.POST_ARTICLE_START: {
+            return {
+                ...state,
+                postLoading: true,
+                postError: null
+            }
+        }
+        case actionTypes.POST_ARTICLE_SUCCESS: {
+            return {
+                ...state,
+                postLoading: false,
+            }
+        }
+        case actionTypes.POST_ARTICLE_FAILED: {
+            return {
+                ...state,
+                postLoading: false,
+                postError: action.err
+            }
+        }
         default:
             return state
     }

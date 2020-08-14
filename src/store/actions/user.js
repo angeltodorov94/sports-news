@@ -1,27 +1,25 @@
 import * as actionTypes from './actionTypes'
+import axios from 'axios'
 
 export const getUserInformation = id => {
     return dispatch => {
         dispatch(getUserInformationStart())
-        fetch('http://localhost:9999/api/user/' + id)
+        axios.get(`http://localhost:9999/api/user/${id}`)
             .then(response => {
                 if (response.status >= 400) throw new Error("Something Went Wrong!")
-                return response.json()
-            })
-            .then(response => dispatch(getUserInformationSuccess(response)))
-            .catch(err => dispatch(getUserInformationFailed(err.message)))
+                dispatch(getUserInformationSuccess(response.data))
+            }).catch(err => dispatch(getUserInformationFailed(err.message)))
     }
 }
 
 export const getAllUsersInformation = () => {
     return dispatch => {
         dispatch(getAllUsersInformationStart())
-        fetch('http://localhost:9999/api/user/')
+        axios.get('http://localhost:9999/api/user/')
             .then(response => {
                 if (response.status >= 400) throw new Error("Something Went Wrong!")
-                return response.json()
+                dispatch(getAllUsersInformationSuccess(response.data))
             })
-            .then(response => dispatch(getAllUsersInformationSuccess(response)))
             .catch(err => dispatch(getAllUsersInformationFailed(err.message)))
     }
 }
@@ -29,12 +27,8 @@ export const getAllUsersInformation = () => {
 export const updateUserInformation = (id, data) => {
     return dispatch => {
         dispatch(getUserInformationStart())
-        fetch(`http://localhost:9999/api/user/${id}`, {
-            method: "PATCH",
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
-        }).then(response => response.json())
-            .then(response => dispatch(getUserInformationSuccess(response)))
+        axios.patch(`http://localhost:9999/api/user/${id}`, data)
+            .then(response => dispatch(getUserInformationSuccess(response.data)))
             .catch(err => {
                 dispatch(getUserInformationFailed("Email is already taken!"))
                 setTimeout(() => {
@@ -46,7 +40,7 @@ export const updateUserInformation = (id, data) => {
 
 export const deleteUser = (id) => {
     return dispatch => {
-        fetch(`http://localhost:9999/api/user/${id}`, { method: "DELETE" })
+        axios.delete(`http://localhost:9999/api/user/${id}`)
             .catch(err => 'Something went wrong!')
     }
 }

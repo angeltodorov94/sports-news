@@ -37,14 +37,15 @@ const getRecentNewsStart = () => {
 const getTopNewsSuccess = (articles) => {
     return {
         type: actionTypes.GET_TOP_NEWS_SUCCESS,
-        data: articles
+        data: articles.data
     }
 }
 
 const getRecentNewsSuccess = (articles) => {
     return {
         type: actionTypes.GET_RECENT_NEWS_SUCCESS,
-        data: articles
+        data: articles.data,
+        count: Number(articles.count)
     }
 }
 

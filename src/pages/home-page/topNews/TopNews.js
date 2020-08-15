@@ -35,7 +35,9 @@ const TopNews = (props) => {
             <Grid container spacing={3} className={classes.root}>
                 {data.length === 0 ? <Loading /> : renderCards(data)}
             </Grid>
-            <Typography type='body' position='right' text={<Link to="/browse" component={RouterLink} align='right'>See more</Link>} />
+            <Typography type='body' position='right' text={
+                <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>
+            } />
         </Box>
     )
 }

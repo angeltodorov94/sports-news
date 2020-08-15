@@ -1,29 +1,30 @@
 import React from 'react'
-import styled from 'styled-components'
+import Grid from '@material-ui/core/Grid'
 import Facebook from './Facebook'
 import YouTube from './YouTube'
 import Instagram from './Instagram'
 import Twitter from './Twitter'
-import Snapchat from './Snapchat'
+import Reddit from './Reddit'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginBottom: theme.spacing(3)
+    },
+}))
 
 const SocialMedia = (props) => {
+    const classes = useStyles()
+
     return (
-        <Container>
+        <Grid container justify='space-around' className={classes.root}>
             <Facebook />
             <Instagram />
             <YouTube />
             <Twitter />
-            <Snapchat />
-        </Container>
+            <Reddit />
+        </Grid>
     )
 }
-
-const Container = styled.div`
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-`
 
 export default SocialMedia

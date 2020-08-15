@@ -7,14 +7,8 @@ router.get('/:id', controllers.article.get.article)
 
 router.post('/', controllers.article.post)
 
-// router.post('/register', controllers.user.post.register)
+router.delete('/:id', controllers.article.delete)
 
-// router.post('/login', controllers.user.post.login)
-
-// router.post('/verifyToken', controllers.user.post.verifyToken)
-
-// router.patch('/:id', controllers.user.patch)
-
-// router.delete('/:id', controllers.user.delete)
+// router.patch('/:id', controllers.article.patch)
 
 module.exports = router

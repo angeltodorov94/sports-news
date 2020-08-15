@@ -10,8 +10,11 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
     content: {
         height: '60px',
+        backgroundColor: 'white',
+        marginTop: '-4px'
     },
     link: {
+        color: '#272121',
         display: 'block',
         textOverflow: 'ellipsis',
         wordWrap: 'break-word',

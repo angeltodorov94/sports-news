@@ -13,7 +13,7 @@ import RegisterPage from './pages/register-page/RegisterPage'
 import LogoutPage from './pages/logout-page/LogoutPage'
 import ProfilePage from './pages/profile-page/ProfilePage'
 import ArticlePage from './pages/article-page/ArticlePage'
-import ArticlesPage from './pages/browse-page/BrowsePage'
+import ArticlesPage from './pages/articles-page/ArticlesPage'
 import CreateArticlePage from './pages/create-article/CreateArticle'
 import ErrorPage from './pages/404/Page404'
 
@@ -33,7 +33,7 @@ const Navigator = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/browse" component={ArticlesPage} />
+        <Route path="/articles" exact component={ArticlesPage} />
         <Route path="/articles/:id" component={ArticlePage} />
         <Route path='/login'>
           {!isAuth ? <LoginPage /> : <Redirect to='/' />}

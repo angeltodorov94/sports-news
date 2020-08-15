@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
-import categories from '../../utils/navigations'
+import { categories } from '../../utils/navigations'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +28,7 @@ const SelectInput = ({ text, name, value, error, onChange, onBlur }) => {
         fullWidth
         margin='none'
     >
-        {categories.map(x => <MenuItem key={x} value={x}>{x.toUpperCase()}</MenuItem>)}
+        {categories.map(x => <MenuItem key={x.value} value={x.value}>{x.name}</MenuItem>)}
     </TextField>
 }
 

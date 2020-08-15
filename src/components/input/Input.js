@@ -3,8 +3,8 @@ import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-    input: {
-        marginBottom: theme.spacing(2)
+    inputField: {
+        marginBottom: theme.spacing(2),
     }
 }))
 
@@ -12,7 +12,7 @@ const InputField = ({ type, name, value, onChange, onBlur, error, text }) => {
     const classes = useStyles()
 
     return <TextField
-        className={classes.input}
+        className={classes.inputField}
         type={type}
         name={name}
         label={text}
@@ -21,7 +21,7 @@ const InputField = ({ type, name, value, onChange, onBlur, error, text }) => {
         onBlur={onBlur}
         error={error ? true : false}
         helperText={error}
-        variant="outlined"
+        variant='outlined'
         required
         fullWidth
         margin='none'

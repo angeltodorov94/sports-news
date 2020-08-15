@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { faHeart as faHeartUnfilled } from '@fortawesome/free-regular-svg-icons'
+import React, { useEffect, useState, Fragment } from 'react'
+import IconButton from '../../../../components/buttons/IconButton'
+import { Favorite, FavoriteBorder } from '@material-ui/icons'
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from 'react-router-dom'
 import { updateUserInformation } from '../../../../store/actions/index'
@@ -24,31 +22,17 @@ const SaveIcon = (props) => {
     }, [params.id, userData])
 
     return (
-        <div>
+        <Fragment>
             {isFavorite ?
-                <Button onClick={() => onClickHandler('remove')}><FontAwesomeIcon icon={faHeart} size="3x" /></Button> :
-                <Button onClick={() => onClickHandler('add')}><FontAwesomeIcon icon={faHeartUnfilled} size="3x" /></Button>
+                <IconButton onClick={() => onClickHandler('remove')}>
+                    <Favorite fontSize='large' />
+                </IconButton> :
+                <IconButton onClick={() => onClickHandler('add')}>
+                    <FavoriteBorder fontSize='large' />
+                </IconButton>
             }
-        </div>
+        </Fragment>
     )
 }
-
-const Button = styled.button`
-    background-color: transparent;
-    border: none;
-    animation: none;
-    outline: none;
-    color: #c23616;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &:active {
-        border: none;
-        animation: none;
-        outline: none;
-    }
-`
 
 export default SaveIcon

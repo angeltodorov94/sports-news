@@ -2,15 +2,20 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import { Link as RouterLink } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import categories from '../../utils/navigations'
+import { categories } from '../../utils/navigations'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     button: {
         borderRadius: '0',
         width: '100%',
+        backgroundColor: '#e16428',
         paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2)
+        paddingBottom: theme.spacing(2),
+
+        '&:hover': {
+            backgroundColor: '#272121'
+        }
     }
 }))
 
@@ -19,17 +24,17 @@ const Categories = (props) => {
 
     const renderCategories = categories.map(x => {
         return (
-            <Grid item key={x} xs={true}>
+            <Grid item key={x.value} xs={true}>
                 <Button
                     variant="contained"
                     color="primary"
                     className={classes.button}
                     component={RouterLink}
-                    to={`/browse?category=${x.replace(' ', '-')}`}
+                    to={`/articles?category=${x.value}`}
                     disableElevation
                     size='large'
                 >
-                    {x}
+                    {x.name}
                 </Button>
             </Grid>
         )
@@ -44,7 +49,7 @@ const Categories = (props) => {
                     size='large'
                     className={classes.button}
                     component={RouterLink}
-                    to={`/browse`}
+                    to={`/articles`}
                     disableElevation
                 >
                     All

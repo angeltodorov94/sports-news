@@ -8,6 +8,7 @@ const initialState = {
     },
     articles: {
         data: [],
+        count: null,
         loading: false,
         error: null
     }
@@ -58,6 +59,7 @@ const reducer = (state = initialState, action) => {
                 articles: {
                     ...state.articles,
                     data: [...action.data],
+                    count: action.count,
                     loading: false,
                     error: null
                 },

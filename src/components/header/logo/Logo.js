@@ -1,21 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from '@material-ui/core/Link'
+import { Link as RouterLink } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+    logo: {
+        fontWeight: 'bold',
+        lineHeight: '64px',
+        fontSize: theme.spacing(4),
+        margin: 'auto 24px',
+        color: 'white'
+    }
+}))
 
 const Logo = (props) => {
-    return <StyledLink to='/'>SportsNews</StyledLink>
-}
+    const classes = useStyles()
 
-const StyledLink = styled(Link)`
-    line-height: 64px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 32px;
-    color: #273c75;
-    margin: 0;
-    @media (min-width: 992px) {
-        margin: 0 0 0 32px;
-    }
-`
+    return <Link component={RouterLink} to="/" className={classes.logo} underline='none'>SportsNews</Link>
+}
 
 export default Logo

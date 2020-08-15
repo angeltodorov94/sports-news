@@ -28,8 +28,15 @@ export const createArticle = data => {
     return dispatch => {
         dispatch(postArticleStart())
         axios.post('/article', data)
-            .then(() => dispatch(postArticleSuccess))
+            .then(() => dispatch(postArticleSuccess()))
             .catch(err => dispatch(postArticleFailed('Something went wrong!')))
+    }
+}
+
+export const deleteArticle = id => {
+    return dispatch => {
+        axios.delete(`/article/${id}`)
+            .catch(err => 'Something went wrong!')
     }
 }
 

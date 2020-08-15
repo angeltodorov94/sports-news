@@ -6,7 +6,7 @@ const initialState = {
     error: null,
     toggle: false,
     update: false,
-    postLoading: false,
+    postLoading: null,
     postError: null
 }
 
@@ -55,7 +55,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.POST_ARTICLE_SUCCESS: {
             return {
                 ...state,
-                postLoading: false,
+                postLoading: false
             }
         }
         case actionTypes.POST_ARTICLE_FAILED: {

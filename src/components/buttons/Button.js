@@ -4,7 +4,16 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        marginBottom: theme.spacing(2)
+        display: 'block',
+        marginBottom: theme.spacing(2),
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '50%',
+        backgroundColor: '#272121',
+
+        '&:hover': {
+            backgroundColor: '#e16428',
+        }
     }
 }))
 

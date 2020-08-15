@@ -30,7 +30,7 @@ const ProfileImageContainer = ({ image }) => {
         <Grid item xs={6} className={classes.root}>
             <ProfileImage image={image} size={256} />
             {showImgInput ? <ImageInput name='image' value={image.value} onChange={(e) => onImageUpload(e)} />
-                : <Link component="button" variant="body2"
+                : <Link component="button" variant="body2" style={{ color: '#272121' }}
                     onClick={() => setShowImgInput(!showImgInput)}>Change Profile Picture</Link>}
         </Grid>
     )

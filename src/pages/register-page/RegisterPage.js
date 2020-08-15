@@ -20,8 +20,10 @@ const RegisterPage = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault()
 
-        if (password.value !== rePassword.value)
+        if (password.value !== rePassword.value) {
             setRePassword({ ...rePassword, error: `Passwords doesn't match!` })
+            return
+        }
         if (email.error !== null || password.error !== null || rePassword.error !== null)
             return
 

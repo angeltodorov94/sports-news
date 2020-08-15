@@ -4,10 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     header: {
-        color: '#273c75',
+        color: '#272121'
+    },
+    caption: {
+        color: '#272121'
     },
     body: {
-        whiteSpace: 'pre-wrap'
+        whiteSpace: 'pre-wrap',
+        color: '#272121'
     }
 })
 
@@ -54,8 +58,8 @@ const Types = (props) => {
         case 'caption':
             return <Typography
                 variant='caption'
-                paragraph
                 color='textSecondary'
+                align={props.position} className={classes.caption}
             >
                 {props.text ? props.text : props.children}
             </Typography>

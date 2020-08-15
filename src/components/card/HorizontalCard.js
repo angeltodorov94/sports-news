@@ -13,11 +13,12 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     link: {
+        color: '#272121',
         fontSize: '36px',
         fontWeight: 'bold',
 
         '&:hover': {
-            color: theme.palette.primary.dark
+            color: '#e16428'
         }
     },
 }))

@@ -1,16 +1,18 @@
 import React from 'react'
 import Box from '@material-ui/core/Box'
 import { makeStyles } from '@material-ui/core/styles'
+import { categoriesObj } from '../../../../utils/navigations'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        backgroundColor: '#03fc96',
+        backgroundColor: '#e16428',
         padding: '10px 25px',
         marginBottom: theme.spacing(2)
     },
     p: {
+        color: 'white',
         margin: theme.spacing(0)
     }
 }))
@@ -20,7 +22,7 @@ const Category = ({ text }) => {
 
     return (
         <Box className={classes.root}>
-            <p className={classes.p}>{text}</p>
+            <p className={classes.p}>{categoriesObj[text].name}</p>
         </Box>
     )
 }

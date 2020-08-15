@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
+import Container from '@material-ui/core/Container'
 import TextArea from '../../../components/textarea/TextArea'
 import Button from '../../../components/buttons/Button'
 import { validation } from '../../../utils/form-validations'
@@ -21,7 +21,7 @@ const PostComment = (props) => {
     }
 
     return (
-        <Container>
+        <Container maxWidth='xs'>
             <TextArea value={inputValue.value} error={inputValue.error}
                 onChange={e => setInputValue({ ...inputValue, value: e.target.value })}
                 onBlur={() => setInputValue(validation('comment', inputValue.value))}
@@ -30,10 +30,5 @@ const PostComment = (props) => {
         </Container>
     )
 }
-
-const Container = styled.div`
-    width: 50%;
-    margin: 0 auto 25px;
-`
 
 export default PostComment

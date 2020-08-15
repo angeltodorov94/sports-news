@@ -8,7 +8,12 @@ const useStyles = makeStyles((theme) => ({
         display: 'none'
     },
     button: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        backgroundColor: '#272121',
+
+        '&:hover': {
+            backgroundColor: '#e16428',
+        }
     }
 }))
 

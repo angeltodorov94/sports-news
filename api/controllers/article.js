@@ -1,7 +1,4 @@
 const models = require('../models')
-const config = require('../config/config')
-const utils = require('../utils')
-const bcrypt = require('bcrypt')
 
 module.exports = {
     get: {
@@ -15,13 +12,17 @@ module.exports = {
         },
 
         articles: (req, res, next) => {
+            const page = req.query.page ? Number(req.query.page) : 1
             const limit = req.query.limit ? Number(req.query.limit) : 10
             const sordBy = req.query.sortBy ? req.query.sortBy : 'createdAt'
-            const category = req.query.category ? { category: req.query.category.replace('-', ' ') } : undefined
+            const category = req.query.category ? { category: req.query.category } : undefined
 
-            models.Article.find({ ...category }).sort({ [sordBy]: 'desc' }).limit(limit)
-                .then((article) => res.send(article))
-                .catch(next)
+            models.Article.countDocuments({ ...category }, (err, count) => {
+                if (err) next()
+                models.Article.find({ ...category }).sort({ [sordBy]: 'desc' }).skip(limit * (page - 1)).limit(limit).populate('comments')
+                    .then(response => res.send({ data: response, count }))
+                    .catch(next)
+            })
         }
     },
 
@@ -49,10 +50,10 @@ module.exports = {
     //     })
     // },
 
-    // delete: (req, res, next) => {
-    //     const id = req.params.id;
-    //     models.User.deleteOne({ _id: id })
-    //         .then((removedUser) => res.send(removedUser))
-    //         .catch(next)
-    // }
+    delete: (req, res, next) => {
+        const id = req.params.id;
+        models.Article.deleteOne({ _id: id })
+            .then(() => res.send('ok'))
+            .catch(next)
+    }
 }

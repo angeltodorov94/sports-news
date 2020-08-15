@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from '@material-ui/core/Link'
-import { Twitter } from '@material-ui/icons'
+import { Reddit } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -8,15 +8,15 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
 
         '&:hover': {
-            color: theme.palette.primary.light
+            color: theme.palette.error.main
         }
     },
 }))
 
-const TwitterIcon = (props) => {
+const RedditIcon = (props) => {
     const classes = useStyles()
 
-    return <Link href="https://www.twitter.com/" className={classes.link}><Twitter fontSize='large' /></Link>
+    return <Link href="https://www.reddit.com/" className={classes.link}><Reddit fontSize='large' /></Link>
 }
 
-export default TwitterIcon
+export default RedditIcon

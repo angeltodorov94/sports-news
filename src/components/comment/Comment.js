@@ -11,6 +11,7 @@ import { deleteComment } from "../../store/actions/index"
 const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
+        backgroundColor: 'white',
         marginBottom: theme.spacing(2),
         padding: theme.spacing(1.5)
     },
@@ -36,11 +37,11 @@ const Comment = ({ data }) => {
 
     return (
         <Paper variant="outlined" className={classes.paper}>
-            <Box marginRight={2}>
+            <Box mr={2}>
                 <ProfileImage image={data.author.profilePicture} size={64} />
             </Box>
             <Box width={1}>
-                <Box component='div' display="flex" justifyContent="space-between">
+                <Box component='div' display="flex" justifyContent="space-between" mb={1}>
                     <Typography type="caption" text={data.author.email} />
                     <Typography type="caption" text={dateFormatted} />
                 </Box>

@@ -26,7 +26,9 @@ const RecentNews = (props) => {
             <Box>
                 {data.length === 0 ? <Loading /> : renderCards(data)}
             </Box>
-            <Typography type='body' position='right' text={<Link to="/browse" component={RouterLink} align='right'>See more</Link>} />
+            <Typography type='body' position='right' text={
+                <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>
+            } />
         </Box>
     )
 }

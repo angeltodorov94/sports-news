@@ -1,27 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faYoutube } from '@fortawesome/free-brands-svg-icons'
+import Link from '@material-ui/core/Link'
+import { YouTube } from '@material-ui/icons'
+import { makeStyles } from '@material-ui/core/styles'
 
-const YouTube = (props) => {
-    return (
-        <Container>
-            <Link href="https://www.instagram.com/"><FontAwesomeIcon icon={faYoutube} size="2x" /></Link>
-        </Container>
-    )
+const useStyles = makeStyles((theme) => ({
+    link: {
+        color: 'white',
+
+        '&:hover': {
+            color: theme.palette.error.main
+        }
+    },
+}))
+
+const YoutubeIcon = (props) => {
+    const classes = useStyles()
+
+    return <Link href="https://www.youtube.com/" className={classes.link}><YouTube fontSize='large' /></Link>
 }
 
-const Container = styled.div`
-    width: 20%;
-`
-
-const Link = styled.a`
-    color: #273c75;
-    margin: 0 auto;
-
-    &:hover {
-        color: red;
-    }
-`
-
-export default YouTube
+export default YoutubeIcon

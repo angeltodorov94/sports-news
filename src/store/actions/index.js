@@ -18,7 +18,8 @@ export {
     getArticle,
     changeToggle,
     cleanArticleState,
-    createArticle
+    createArticle,
+    deleteArticle
 } from './article'
 export {
     postComment,

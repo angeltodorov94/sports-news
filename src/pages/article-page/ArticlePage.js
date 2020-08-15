@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box'
 import PageLayout from '../PageLayout'
 import Typography from '../../components/titles/Typography'
 import Loading from '../../components/loading/Loading'
-import Error from '../../components/messages/Error'
+// import Error from '../../components/messages/Error'
 import CommentsButton from '../../components/commentsButton/CommentsButton'
 import Top from './top/Top'
 import Image from '../../components/imagesCloudinary/Image'
@@ -18,7 +18,7 @@ const ArticlePage = (props) => {
     const params = useParams()
     const data = useSelector(state => state.article.data)
     const loading = useSelector(state => state.article.loading)
-    const error = useSelector(state => state.article.error)
+    // const error = useSelector(state => state.article.error)
     const isAuth = useSelector(state => state.auth.token !== null)
     const toggle = useSelector(state => state.article.toggle)
     const update = useSelector(state => state.article.update)

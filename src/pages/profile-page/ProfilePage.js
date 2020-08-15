@@ -11,8 +11,12 @@ import TabPanels from './panels/index'
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: 'transparent',
-        color: theme.palette.primary.dark,
-        boxShadow: 'none'
+        color: '#272121',
+        boxShadow: 'none',
+    },
+    indicator: {
+        backgroundColor: '#e16428'
+
     }
 }))
 
@@ -35,7 +39,7 @@ const ProfilePage = (props) => {
     return (
         <PageLayout>
             <AppBar position="static" className={classes.root}>
-                <Tabs value={value} onChange={handleChange} variant='fullWidth' indicatorColor='primary'>
+                <Tabs value={value} classes={{ indicator: classes.indicator }} onChange={handleChange} variant='fullWidth' indicatorColor='primary'>
                     <Tab label="Profile Info" />
                     <Tab label="Liked Pages" />
                     <Tab label="Security" />

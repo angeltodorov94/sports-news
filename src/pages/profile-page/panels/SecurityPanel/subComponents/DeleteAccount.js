@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import Typography from '../../../../../components/titles/Typography'
 import Input from '../../../../../components/input/Input'
 import Button from '../../../../../components/buttons/Button'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser, logout } from "../../../../../store/actions/index"
 
 const DeleteAccount = (props) => {

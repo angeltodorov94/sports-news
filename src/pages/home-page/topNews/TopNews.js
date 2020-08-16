@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import Link from '@material-ui/core/Link'
 import { Link as RouterLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Box, Grid, Link } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import Typography from '../../../components/titles/Typography'
 import Loading from '../../../components/loading/Loading'
-import { useDispatch, useSelector } from 'react-redux'
 import { getTopNews } from '../../../store/actions/index'
 import Card from '../../../components/card/Card'
-import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,9 +33,9 @@ const TopNews = (props) => {
             <Grid container spacing={3} className={classes.root}>
                 {data.length === 0 ? <Loading /> : renderCards(data)}
             </Grid>
-            <Typography type='body' position='right' text={
+            <Typography type='body' position='right'>
                 <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>
-            } />
+            </Typography>
         </Box>
     )
 }

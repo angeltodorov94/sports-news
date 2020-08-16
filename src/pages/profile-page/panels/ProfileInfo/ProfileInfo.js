@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import Typography from '../../../../components/titles/Typography'
 import Grid from '@material-ui/core/Grid'
+import Typography from '../../../../components/titles/Typography'
 import Loading from '../../../../components/loading/Loading'
 import Info from '../../../../components/messages/Info'
 import Card from '../../../../components/card/Card'
@@ -8,7 +8,8 @@ import ProfileImage from './ProfileImage/ProfileImage'
 
 const ProfileInfo = ({ data }) => {
     const renderCards = (articles) => {
-        return articles.map(x => {
+        const array = articles.reverse().slice(0, 4)
+        return array.map(x => {
             return <Card key={x._id} id={x._id} imageUrl={x.imageUrl} title={x.title} />
         })
     }
@@ -22,7 +23,7 @@ const ProfileInfo = ({ data }) => {
             <Typography type='h4' position='center' text='Profile Info' />
             <Grid container spacing={3}>
                 <ProfileImage image={data.profilePicture} />
-                <Grid item xs={6}>
+                <Grid item xs={6} style={{ textAlign: 'center' }}>
                     <p>Email: {data.email}</p>
                     <p>Liked Articles: {data.savedArticles.length}</p>
                     <p>Posted Comments: {data.postedComments.length}</p>

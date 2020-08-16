@@ -11,13 +11,14 @@ import HorizontalCard from '../../components/card/HorizontalCard'
 import { categoriesObj } from '../../utils/navigations'
 
 const BrowsePage = (props) => {
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const search = history.location.search
     const data = useSelector(state => state.articles.articles.data)
     const count = useSelector(state => state.articles.articles.count)
     const loading = useSelector(state => state.articles.articles.loading)
     const [title, setTitle] = useState('Recent Articles')
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const search = history.location.search
 
     useEffect(() => {
         if (search.length > 0 && search.includes('category')) {

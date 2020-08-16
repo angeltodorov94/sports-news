@@ -30,8 +30,7 @@ const ChangeEmail = (props) => {
             <Typography type='h6' text="Change Email" />
             <Input type="email" text="New Email" name="email" value={email} error={errorEmail}
                 onChange={(e) => setEmail(e.target.value)}
-                onBlur={(e) => onBlurHandler(e)}
-            />
+                onBlur={(e) => onBlurHandler(e)} />
             <Button type="submit" text="Change Email" onClick={onClickHandler} />
         </Box>
     )

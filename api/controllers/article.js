@@ -32,24 +32,6 @@ module.exports = {
             .catch(next)
     },
 
-    // put: async (req, res, next) => {
-    //     const id = req.params.id
-    //     let hash = await bcrypt.genSalt(10)
-    //     if (req.body.password) {
-    //         hash = await bcrypt.hash(req.body.password, hash)
-    //         req.body.password = hash
-    //     }
-    //     console.log(req.body.password)
-    //     await models.User.findByIdAndUpdate({ _id: id }, { ...req.body }, { new: true }, (err, updatedUser) => {
-    //         if (err) {
-    //             if (err.code === 11000)
-    //                 res.status(500).send('Email is already taken!')
-    //         } else {
-    //             res.send(updatedUser)
-    //         }
-    //     })
-    // },
-
     delete: (req, res, next) => {
         const id = req.params.id;
         models.Article.deleteOne({ _id: id })

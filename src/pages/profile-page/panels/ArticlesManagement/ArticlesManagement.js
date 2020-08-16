@@ -28,9 +28,7 @@ const ArticlesManagement = (props) => {
             <Table cols={cols}>
                 {data.map((article) => (
                     <TableRow key={article._id}>
-                        <TableCell>
-                            {article.title}
-                        </TableCell>
+                        <TableCell>{article.title}</TableCell>
                         <TableCell align="center">{article.clicks}</TableCell>
                         <TableCell align="center">{article.comments.length}</TableCell>
                         <TableCell align="center">

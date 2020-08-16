@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import Box from '@material-ui/core/Box'
-import Link from '@material-ui/core/Link'
+import { Box, Link } from '@material-ui/core'
 import Typography from '../../../components/titles/Typography'
 import Loading from '../../../components/loading/Loading'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from 'react-redux'
 import { getRecentNews } from '../../../store/actions/index'
 import HorizontalCard from '../../../components/card/HorizontalCard'
 
@@ -26,9 +25,9 @@ const RecentNews = (props) => {
             <Box>
                 {data.length === 0 ? <Loading /> : renderCards(data)}
             </Box>
-            <Typography type='body' position='right' text={
+            <Typography type='body' position='right'>
                 <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>
-            } />
+            </Typography>
         </Box>
     )
 }

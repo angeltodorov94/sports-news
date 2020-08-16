@@ -1,5 +1,3 @@
-// const categories = ['football', 'nba', 'nfl', 'formula 1', 'tennis', 'box', 'ufc']
-
 const categories = [
     { value: 'football', name: 'Football' },
     { value: 'nba', name: 'NBA' },

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import Container from '@material-ui/core/Container'
 import PageLayout from '../PageLayout'
 import Typography from '../../components/titles/Typography'
 import Input from '../../components/input/Input'
@@ -8,7 +9,6 @@ import ImageInput from '../../components/input/ImageInput'
 import TextArea from '../../components/textarea/TextArea'
 import Select from '../../components/select/Select'
 import Button from '../../components/buttons/Button'
-import Container from '@material-ui/core/Container'
 import { validation, checkValidity } from '../../utils/form-validations'
 import imageUpload from '../../utils/imageUpload'
 import { createArticle } from '../../store/actions/index'
@@ -39,7 +39,7 @@ const CreateArticle = (props) => {
             author: author.value,
             category: category.value
         }))
-        history.push('/')
+        setTimeout(() => history.push('/'), 1500)
     }
 
     return (

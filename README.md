@@ -22,13 +22,9 @@ This single-page application is build with React as front-end and is communicati
 
 #### Install the dependencies
 `yarn install`
-<br />
-`npm install`
 
 #### Start the project
 `yarn start`
-<br />
-`npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

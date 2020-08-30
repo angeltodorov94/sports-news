@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const secret = 'secret'
 const express = require('express')
 
 module.exports = (app) => {
@@ -11,5 +10,5 @@ module.exports = (app) => {
         extended: true
     }))
 
-    app.use(cookieParser(secret))
+    app.use(cookieParser('secret'))
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Box from '@material-ui/core/Box'
-import Typography from '../../../../../components/titles/Typography'
+import Typography from '../../../../../components/typography/Typography'
 import Input from '../../../../../components/input/Input'
 import Button from '../../../../../components/buttons/Button'
 import { validation } from '../../../../../utils/form-validations'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { updateUserInformation } from "../../../../../store/actions/index"
 
 const ChangePassword = (props) => {
@@ -13,7 +13,6 @@ const ChangePassword = (props) => {
     const [rePassword, setRePassword] = useState('')
     const [errorRePassword, setErrorRePassword] = useState(null)
 
-    const id = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
 
     const onBlurHandler = (e) => {
@@ -30,7 +29,7 @@ const ChangePassword = (props) => {
             setErrorRePassword("Passwords doesn't match!")
             return
         }
-        dispatch(updateUserInformation(id, { password }))
+        dispatch(updateUserInformation({ password }))
     }
 
     return (

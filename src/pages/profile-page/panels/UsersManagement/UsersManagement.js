@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import Table from '../../../../components/table/Table'
 import { TableRow, TableCell, Link } from '@material-ui/core'
 import Loading from '../../../../components/loading/Loading'
-import Typography from '../../../../components/titles/Typography'
-import { getAllUsersInformation, deleteUser, updateUserInformation } from '../../../../store/actions/index'
+import Typography from '../../../../components/typography/Typography'
+import { getAllUsersInformation, admin_deleteUser, admin_updateUserInformation } from '../../../../store/actions/index'
 
 const cols = ['Email', 'isAdmin', '', '']
 
 const UsersManagement = (props) => {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.user.allUsers)
-    const loading = useSelector(state => state.user.loading)
+    const data = useSelector(state => state.admin.allUsers)
+    const loading = useSelector(state => state.admin.loading)
     const [change, setChange] = useState(false)
 
     useEffect(() => {
@@ -19,13 +19,13 @@ const UsersManagement = (props) => {
     }, [dispatch, change])
 
     const deleteHandler = id => {
-        dispatch(deleteUser(id))
+        dispatch(admin_deleteUser(id))
         setChange(!change)
     }
 
     const changeAdminStatus = (id, isAdmin) => {
         const obj = isAdmin ? { isAdmin: false } : { isAdmin: true }
-        dispatch(updateUserInformation(id, obj))
+        dispatch(admin_updateUserInformation(id, obj))
         setChange(!change)
     }
 

@@ -14,10 +14,6 @@ const UserSchema = new mongoose.Schema({
         minlength: 8,
         required: true
     },
-    username: {
-        type: String,
-        default: ''
-    },
     profilePicture: {
         type: String,
         default: 'default-profile-picture_zjrzyv'

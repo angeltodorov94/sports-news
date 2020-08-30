@@ -1,18 +1,17 @@
 const controllers = require('../controllers/')
 const router = require('express').Router()
+const { isGuest, isAuth } = require('../utils/auth')
 
-router.get('/', controllers.user.get)
+router.post('/register', isGuest, controllers.user.post.register)
 
-router.get('/:id', controllers.user.get)
-
-router.post('/register', controllers.user.post.register)
-
-router.post('/login', controllers.user.post.login)
+router.post('/login', isGuest, controllers.user.post.login)
 
 router.post('/verifyToken', controllers.user.post.verifyToken)
 
-router.patch('/:id', controllers.user.patch)
+router.get('/', isAuth, controllers.user.get)
 
-router.delete('/:id', controllers.user.delete)
+router.patch('/', isAuth, controllers.user.patch)
+
+router.delete('/', isAuth, controllers.user.delete)
 
 module.exports = router

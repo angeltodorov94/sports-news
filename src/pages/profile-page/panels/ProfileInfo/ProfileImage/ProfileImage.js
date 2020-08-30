@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Grid, Link } from '@material-ui/core'
 import imageUpload from '../../../../../utils/imageUpload'
 import ImageInput from '../../../../../components/input/ImageInput'
@@ -15,14 +15,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ProfileImageContainer = ({ image }) => {
-    const id = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
     const classes = useStyles()
     const [showImgInput, setShowImgInput] = useState(false)
 
     const onImageUpload = async e => {
         const publicId = await imageUpload(e.target.files)
-        dispatch(updateUserInformation(id, { profilePicture: publicId }))
+        dispatch(updateUserInformation({ profilePicture: publicId }))
         setShowImgInput(false)
     }
 

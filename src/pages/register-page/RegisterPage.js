@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PageLayout from '../PageLayout'
-import Typography from '../../components/titles/Typography'
+import Typography from '../../components/typography/Typography'
 import Input from '../../components/input/Input'
 import Button from '../../components/buttons/Button'
 import ErrorMessage from '../../components/messages/Error'

@@ -1,7 +1,6 @@
 import React from 'react'
-import Typography from '../../../components/titles/Typography'
-import Container from '@material-ui/core/Container'
-import Box from '@material-ui/core/Box'
+import Typography from '../../../components/typography/Typography'
+import { Container, Box } from '@material-ui/core'
 
 const ArticleContent = ({ data }) => {
     const date = new Date(data.createdAt)

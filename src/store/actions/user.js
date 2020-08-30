@@ -1,10 +1,11 @@
 import * as actionTypes from './actionTypes'
+import { logout } from './index'
 import axios from 'axios'
 
-export const getUserInformation = id => {
+export const getUserInformation = () => {
     return dispatch => {
         dispatch(getUserInformationStart())
-        axios.get(`http://localhost:9999/api/user/${id}`)
+        axios.get(`/user`)
             .then(response => {
                 if (response.status >= 400) throw new Error("Something Went Wrong!")
                 dispatch(getUserInformationSuccess(response.data))
@@ -12,22 +13,10 @@ export const getUserInformation = id => {
     }
 }
 
-export const getAllUsersInformation = () => {
-    return dispatch => {
-        dispatch(getAllUsersInformationStart())
-        axios.get('http://localhost:9999/api/user/')
-            .then(response => {
-                if (response.status >= 400) throw new Error("Something Went Wrong!")
-                dispatch(getAllUsersInformationSuccess(response.data))
-            })
-            .catch(err => dispatch(getAllUsersInformationFailed(err.message)))
-    }
-}
-
-export const updateUserInformation = (id, data) => {
+export const updateUserInformation = (data) => {
     return dispatch => {
         dispatch(getUserInformationStart())
-        axios.patch(`http://localhost:9999/api/user/${id}`, data)
+        axios.patch(`/user`, data)
             .then(response => dispatch(getUserInformationSuccess(response.data)))
             .catch(err => {
                 dispatch(getUserInformationFailed("Email is already taken!"))
@@ -38,9 +27,10 @@ export const updateUserInformation = (id, data) => {
     }
 }
 
-export const deleteUser = (id) => {
+export const deleteUser = () => {
     return dispatch => {
-        axios.delete(`http://localhost:9999/api/user/${id}`)
+        axios.delete(`/user`)
+            .then(() => dispatch(logout()))
             .catch(err => 'Something went wrong!')
     }
 }
@@ -50,12 +40,6 @@ export const deleteUser = (id) => {
 const getUserInformationStart = () => {
     return {
         type: actionTypes.GET_USER_INFO_START
-    }
-}
-
-const getAllUsersInformationStart = () => {
-    return {
-        type: actionTypes.GET_ALL_USERS_INFO_START
     }
 }
 
@@ -72,23 +56,9 @@ export const getUserInformationSuccess = (dataObj) => {
     }
 }
 
-const getAllUsersInformationSuccess = (dataObj) => {
-    return {
-        type: actionTypes.GET_ALL_USERS_INFO_SUCCESS,
-        allUsers: dataObj
-    }
-}
-
 const getUserInformationFailed = (err) => {
     return {
         type: actionTypes.GET_USER_INFO_FAILED,
-        err
-    }
-}
-
-const getAllUsersInformationFailed = (err) => {
-    return {
-        type: actionTypes.GET_ALL_USERS_INFO_FAILED,
         err
     }
 }

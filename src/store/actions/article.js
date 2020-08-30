@@ -24,22 +24,6 @@ export const cleanArticleState = () => {
     }
 }
 
-export const createArticle = data => {
-    return dispatch => {
-        dispatch(postArticleStart())
-        axios.post('/article', data)
-            .then(() => dispatch(postArticleSuccess()))
-            .catch(err => dispatch(postArticleFailed('Something went wrong!')))
-    }
-}
-
-export const deleteArticle = id => {
-    return dispatch => {
-        axios.delete(`/article/${id}`)
-            .catch(err => 'Something went wrong!')
-    }
-}
-
 // -------------------------------------------------------
 
 const getArticleStart = () => {
@@ -59,24 +43,5 @@ const getArticleError = () => {
     return {
         type: actionTypes.GET_ARTICLE_FAILED,
         err: "Something Went Wrong!"
-    }
-}
-
-const postArticleStart = () => {
-    return {
-        type: actionTypes.POST_ARTICLE_START
-    }
-}
-
-const postArticleSuccess = () => {
-    return {
-        type: actionTypes.POST_ARTICLE_SUCCESS
-    }
-}
-
-const postArticleFailed = err => {
-    return {
-        type: actionTypes.POST_ARTICLE_FAILED,
-        err
     }
 }

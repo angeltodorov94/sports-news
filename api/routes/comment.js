@@ -1,8 +1,9 @@
 const controllers = require('../controllers/')
 const router = require('express').Router()
+const { isAuth } = require('../utils/auth')
 
-router.post('/', controllers.comment.post)
+router.post('/', isAuth, controllers.comment.post)
 
-router.delete('/:id', controllers.comment.delete)
+router.delete('/:articleId/:id', isAuth, controllers.comment.delete)
 
 module.exports = router

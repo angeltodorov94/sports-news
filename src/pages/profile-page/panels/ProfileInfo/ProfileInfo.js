@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import Grid from '@material-ui/core/Grid'
-import Typography from '../../../../components/titles/Typography'
+import Typography from '../../../../components/typography/Typography'
 import Loading from '../../../../components/loading/Loading'
 import Info from '../../../../components/messages/Info'
 import Card from '../../../../components/card/Card'

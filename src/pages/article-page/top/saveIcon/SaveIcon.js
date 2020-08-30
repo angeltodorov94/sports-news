@@ -8,13 +8,12 @@ import isFavoriteChecker from '../../../../utils/favoriteArticle'
 
 const SaveIcon = (props) => {
     const [isFavorite, setIsFavorite] = useState(null)
-    const userId = useSelector(state => state.auth.id)
     const userData = useSelector(state => state.user.userDetails)
     const params = useParams()
     const dispatch = useDispatch()
 
     const onClickHandler = (type) => {
-        dispatch(updateUserInformation(userId, { [type]: params.id }))
+        dispatch(updateUserInformation({ [type]: params.id }))
     }
 
     useEffect(() => {

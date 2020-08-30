@@ -1,16 +1,16 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 
-export const postComment = (content, articleId, userId) => {
+export const postComment = (content, articleId) => {
     return dispatch => {
-        axios.post('/comment', { content, articleId, userId })
+        axios.post('/comment', { content, articleId })
             .then(response => dispatch(articleUpdate()))
     }
 }
 
-export const deleteComment = id => {
+export const deleteComment = (articleId, id) => {
     return dispatch => {
-        axios.delete(`/comment/${id}`)
+        axios.delete(`/comment/${articleId}/${id}`)
             .then(() => dispatch(articleUpdate()))
     }
 }

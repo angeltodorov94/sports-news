@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Typography from '../../../../components/titles/Typography'
+import Typography from '../../../../components/typography/Typography'
 import HorizontalCard from '../../../../components/card/HorizontalCard'
 import Info from '../../../../components/messages/Info'
 

@@ -1,12 +1,11 @@
 import React from 'react'
-import Typography from '../../components/titles/Typography'
-import Paper from '@material-ui/core/Paper'
-import Box from '@material-ui/core/Box'
-import Link from '@material-ui/core/Link'
-import ProfileImage from '../imagesCloudinary/ProfileImage'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Paper, Box, Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { useDispatch, useSelector } from "react-redux"
-import { deleteComment } from "../../store/actions/index"
+import Typography from '../../components/typography/Typography'
+import ProfileImage from '../imagesCloudinary/ProfileImage'
+import { deleteComment } from '../../store/actions/index'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,27 +25,28 @@ const useStyles = makeStyles((theme) => ({
 const Comment = ({ data }) => {
     const date = new Date(data.createdAt)
     const dateFormatted = `${date.getMonth()}.${date.getDate()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
-
+    const params = useParams()
     const classes = useStyles()
     const dispatch = useDispatch()
     const userId = useSelector(state => state.auth.id)
 
     const onClickHandler = () => {
-        dispatch(deleteComment(data._id))
+        dispatch(deleteComment(params.id, data._id))
     }
-
+    console.log(data)
     return (
         <Paper variant="outlined" className={classes.paper}>
             <Box mr={2}>
-                <ProfileImage image={data.author.profilePicture} size={64} />
+                <ProfileImage image={data.author !== null ? data.author.profilePicture : '/hwzwsxu3qi2ukhhmpyh4'} size={64} />
             </Box>
             <Box width={1}>
                 <Box component='div' display="flex" justifyContent="space-between" mb={1}>
-                    <Typography type="caption" text={data.author.email} />
+                    <Typography type="caption" text={data.author !== null ? data.author.email : 'unknown user'} />
                     <Typography type="caption" text={dateFormatted} />
                 </Box>
                 <Typography type="body" text={data.content} />
-                {data.author._id === userId ? <Link component="button" onClick={onClickHandler} className={classes.delete}>Delete</Link> : null}
+                {data.author === null ? null :
+                    (data.author._id === userId ? <Link component="button" onClick={onClickHandler} className={classes.delete}>Delete</Link> : null)}
             </Box>
         </Paper>
     )

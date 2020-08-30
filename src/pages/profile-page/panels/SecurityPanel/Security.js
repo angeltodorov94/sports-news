@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Container } from '@material-ui/core'
-import Typography from '../../../../components/titles/Typography'
+import Typography from '../../../../components/typography/Typography'
 import Divider from '../../../../components/divider/Divider'
 import ChangeEmail from './subComponents/ChangeEmail'
 import ChangePassword from './subComponents/ChangePassword'

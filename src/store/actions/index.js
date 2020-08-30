@@ -7,9 +7,16 @@ export {
     getUserInformation,
     getUserInformationSuccess,
     updateUserInformation,
-    getAllUsersInformation,
     deleteUser
 } from './user'
+export {
+    createArticle,
+    deleteArticle,
+    getAllArticles,
+    getAllUsersInformation,
+    admin_updateUserInformation,
+    admin_deleteUser
+} from './admin.js'
 export {
     getTopNews,
     getRecentNews
@@ -18,8 +25,6 @@ export {
     getArticle,
     changeToggle,
     cleanArticleState,
-    createArticle,
-    deleteArticle
 } from './article'
 export {
     postComment,

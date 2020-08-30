@@ -1,7 +1,7 @@
 import React from 'react'
 import { ExpandMore, ExpandLess } from '@material-ui/icons'
 import Box from '@material-ui/core/Box'
-import Typography from '../titles/Typography'
+import Typography from '../typography/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({

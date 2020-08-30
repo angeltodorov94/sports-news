@@ -45,7 +45,7 @@ export const checkAuthenticationStatus = () => {
             dispatch(logout())
         }
         else {
-            axios.post(`http://localhost:9999/api/user/verifyToken`, { token })
+            axios.post(`http://localhost:9999/api/user/verifyToken`)
                 .then(response => {
                     if (response.data.status === false)
                         dispatch(logout())

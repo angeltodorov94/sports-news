@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 import TextArea from '../../../components/textarea/TextArea'
@@ -11,12 +11,11 @@ const PostComment = (props) => {
     const [inputValue, setInputValue] = useState({ value: '', error: null })
 
     const articleId = useParams().id
-    const userId = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
 
     const onClickHandler = () => {
         if (inputValue.value === '') return
-        dispatch(postComment(inputValue.value, articleId, userId))
+        dispatch(postComment(inputValue.value, articleId))
         setInputValue({ value: '', error: null })
     }
 

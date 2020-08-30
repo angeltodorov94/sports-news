@@ -1,6 +1,5 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
+import { TextField, MenuItem } from '@material-ui/core'
 import { categories } from '../../utils/navigations'
 import { makeStyles } from '@material-ui/core/styles'
 

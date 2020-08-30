@@ -2,7 +2,7 @@ import React from 'react'
 import PageLayout from '../PageLayout'
 import Box from '@material-ui/core/Box'
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined'
-import Typography from '../../components/titles/Typography'
+import Typography from '../../components/typography/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({

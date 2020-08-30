@@ -21,14 +21,13 @@ const useStyles = makeStyles((theme) => ({
 const ProfilePage = (props) => {
     const classes = useStyles()
     const [value, setValue] = useState(0)
-    const id = useSelector(state => state.auth.id)
     const isAdmin = useSelector(state => state.auth.isAdmin)
     const userDetails = useSelector(state => state.user.userDetails)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getUserInformation(id))
-    }, [dispatch, id])
+        dispatch(getUserInformation())
+    }, [dispatch])
 
     const handleChange = (event, newValue) => {
         setValue(newValue)

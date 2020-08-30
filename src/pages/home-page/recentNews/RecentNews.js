@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { Box, Link } from '@material-ui/core'
-import Typography from '../../../components/titles/Typography'
+import Typography from '../../../components/typography/Typography'
 import Loading from '../../../components/loading/Loading'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRecentNews } from '../../../store/actions/index'

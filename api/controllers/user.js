@@ -1,12 +1,11 @@
-const models = require('../models')
+const { User, Comment, Article } = require('../models')
 const mongoose = require('mongoose')
-const utils = require('../utils')
-const bcrypt = require('bcrypt')
+const { createToken, verifyToken } = require('../utils/jwt')
+const hashPassword = require('../utils/hashPassword')
 
 module.exports = {
     get: (req, res, next) => {
-        const search = req.params.id ? { _id: req.params.id } : undefined
-        models.User.find(search).populate('savedArticles')
+        User.findById(req.userId).populate('savedArticles')
             .then((user) => res.send(user))
             .catch(next)
     },
@@ -14,9 +13,9 @@ module.exports = {
     post: {
         register: (req, res, next) => {
             const { email, password } = req.body;
-            models.User.create({ email, password })
+            User.create({ email, password })
                 .then((createdUser) => {
-                    const token = utils.jwt.createToken({ id: createdUser._id })
+                    const token = createToken({ id: createdUser._id })
                     res.header("Authorization", token).send(createdUser)
                 })
                 .catch(next)
@@ -24,25 +23,24 @@ module.exports = {
 
         login: (req, res, next) => {
             const { email, password } = req.body
-            models.User.findOne({ email }).populate('savedArticles')
+            User.findOne({ email }).populate('savedArticles')
                 .then((user) => Promise.all([user, user.matchPassword(password)]))
                 .then(([user, match]) => {
                     if (!match) {
                         res.status(500).send('Wrong email or password!')
                         return
                     }
-                    const token = utils.jwt.createToken({ id: user._id })
+                    const token = createToken({ id: user._id })
                     res.header("Authorization", token).send(user)
                 })
                 .catch(next)
         },
 
         verifyToken: (req, res, next) => {
-            const token = req.body.token || '';
-
-            utils.jwt.verifyToken(token)
+            const token = req.get('Authorization') || '';
+            verifyToken(token)
                 .then(response => {
-                    models.User.findById(response.id).populate('savedArticles')
+                    User.findById(response.id).populate('savedArticles')
                         .then((user) => {
                             if (user === null) throw new Error("User not found")
                             res.send({ status: true, user })
@@ -57,13 +55,6 @@ module.exports = {
     },
 
     patch: async (req, res, next) => {
-        const id = req.params.id
-        let hash = await bcrypt.genSalt(10)
-        if (req.body.password) {
-            hash = await bcrypt.hash(req.body.password, hash)
-            req.body.password = hash
-        }
-
         let obj = {}
         if (req.body.remove)
             obj = { $pull: { savedArticles: mongoose.mongo.ObjectID(req.body.remove) } }
@@ -72,22 +63,25 @@ module.exports = {
         else
             obj = { ...req.body }
 
-        await models.User.findByIdAndUpdate({ _id: id }, { ...obj }, { new: true }).populate('savedArticles').populate('postedComments')
-            .then(updatedUser => res.send(updatedUser))
-            .catch(err => {
-                if (err.code === 11000)
-                    res.status(500).send('Email is already taken!')
-                else res.status(500).send('Something went wrong!')
-            })
+        if (obj.password)
+            obj.password = await hashPassword(req.body.password)
+
+        try {
+            const user = await User.findByIdAndUpdate(req.userId, { ...obj }, { new: true }).populate('savedArticles').populate('postedComments')
+            res.status(200).send(user)
+        } catch (error) {
+            if (error.code === 11000)
+                res.status(500).send('Email is already taken!')
+            else res.status(500).send('Something went wrong!')
+        }
     },
 
-    delete: (req, res, next) => {
-        const id = req.params.id;
-        models.User.deleteOne({ _id: id })
-            .then(() => {
-                models.Comment.deleteMany({ author: mongoose.mongo.ObjectID(id) })
-                    .catch(next)
-            })
-            .catch(next)
+    delete: async (req, res, next) => {
+        try {
+            await User.findByIdAndRemove(req.userId)
+            res.status(200).send('User deleted!')
+        } catch (error) {
+            res.status(500).send('Something went wrong!')
+        }
     }
 }

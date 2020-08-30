@@ -25,10 +25,6 @@ const ArticleSchema = new mongoose.Schema({
         minlength: 1,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
     clicks: {
         type: Number,
         default: 0
@@ -37,6 +33,6 @@ const ArticleSchema = new mongoose.Schema({
         type: 'ObjectId',
         ref: 'Comment'
     }]
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Article', ArticleSchema)

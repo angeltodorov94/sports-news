@@ -1,21 +1,21 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Typography from '../../../../components/titles/Typography'
+import Typography from '../../../../components/typography/Typography'
 import Loading from '../../../../components/loading/Loading'
 import Table from '../../../../components/table/Table'
 import { TableRow, TableCell, Link } from '@material-ui/core'
-import { getRecentNews, deleteArticle } from '../../../../store/actions/index'
+import { getAllArticles, deleteArticle } from '../../../../store/actions/index'
 
 const cols = ['Title', 'Views', 'Comments', '']
 
 const ArticlesManagement = (props) => {
     const dispatch = useDispatch()
-    const data = useSelector(state => state.articles.articles.data)
-    const loading = useSelector(state => state.articles.articles.loading)
+    const data = useSelector(state => state.admin.allArticles)
+    const loading = useSelector(state => state.admin.loading)
     const [change, setChange] = useState(false)
 
     useEffect(() => {
-        dispatch(getRecentNews('?limit=10000'))
+        dispatch(getAllArticles())
     }, [dispatch, change])
 
     const deleteHandler = id => {

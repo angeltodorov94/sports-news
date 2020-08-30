@@ -1,8 +1,7 @@
 import React from 'react'
-import Link from '@material-ui/core/Link'
+import { Link, Grid } from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
 import Image from '../imagesCloudinary/Image'
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({

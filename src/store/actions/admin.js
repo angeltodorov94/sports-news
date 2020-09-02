@@ -40,7 +40,7 @@ export const getAllUsersInformation = () => {
 
 export const admin_updateUserInformation = (id, data) => {
     return dispatch => {
-        axios.patch(`/admin/user/${id}`)
+        axios.patch(`/admin/user/${id}`, data)
             .catch(err => 'Something went wrong!')
     }
 }

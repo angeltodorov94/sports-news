@@ -8,6 +8,8 @@ import TabPanels from './panels/index'
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        marginTop: theme.spacing(-5),
+        marginBottom: theme.spacing(3),
         backgroundColor: 'transparent',
         color: '#272121',
         boxShadow: 'none',
@@ -24,6 +26,7 @@ const ProfilePage = (props) => {
     const isAdmin = useSelector(state => state.auth.isAdmin)
     const userDetails = useSelector(state => state.user.userDetails)
     const dispatch = useDispatch()
+    document.title = 'Sports News | Profile'
 
     useEffect(() => {
         dispatch(getUserInformation())

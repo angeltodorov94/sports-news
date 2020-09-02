@@ -3,9 +3,7 @@ import axios from 'axios'
 
 export const getArticle = id => {
     return (dispatch, getState) => {
-        if (getState().article.data === null)
-            dispatch(getArticleStart())
-
+        dispatch(getArticleStart())
         axios.get(`/article/${id}`)
             .then(response => dispatch(getArticleSuccess(response.data)))
             .catch(err => dispatch(getArticleError()))
@@ -42,6 +40,6 @@ const getArticleSuccess = (article) => {
 const getArticleError = () => {
     return {
         type: actionTypes.GET_ARTICLE_FAILED,
-        err: "Something Went Wrong!"
+        err: 'Something Went Wrong!'
     }
 }

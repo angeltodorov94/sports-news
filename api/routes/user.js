@@ -1,10 +1,12 @@
 const controllers = require('../controllers/')
 const router = require('express').Router()
-const { isGuest, isAuth } = require('../utils/auth')
+const { isGuest, isAuth } = require('../middlewares/auth')
+const { loginCheck, registerCheck } = require('../middlewares/validators')
+const validationResult = require('../middlewares/validationResult')
 
-router.post('/register', isGuest, controllers.user.post.register)
+router.post('/register', [isGuest, registerCheck, validationResult], controllers.user.post.register)
 
-router.post('/login', isGuest, controllers.user.post.login)
+router.post('/login', [isGuest, loginCheck, validationResult], controllers.user.post.login)
 
 router.post('/verifyToken', controllers.user.post.verifyToken)
 

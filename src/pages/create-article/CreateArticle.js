@@ -14,6 +14,7 @@ import imageUpload from '../../utils/imageUpload'
 import { createArticle } from '../../store/actions/index'
 
 const CreateArticle = (props) => {
+    document.title = 'Sports News | Create Article'
     const [title, setTitle] = useState({ value: '', error: null })
     const [content, setContent] = useState({ value: '', error: null })
     const [imageUrl, setImageUrl] = useState({ value: '', error: null })

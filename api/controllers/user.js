@@ -1,56 +1,54 @@
-const { User, Comment, Article } = require('../models')
+const { User } = require('../models')
 const mongoose = require('mongoose')
 const { createToken, verifyToken } = require('../utils/jwt')
 const hashPassword = require('../utils/hashPassword')
 
 module.exports = {
-    get: (req, res, next) => {
-        User.findById(req.userId).populate('savedArticles')
-            .then((user) => res.send(user))
-            .catch(next)
+    get: async (req, res, next) => {
+        try {
+            const user = await User.findById(req.userId).populate('savedArticles')
+            res.status(200).send(user)
+        } catch (error) {
+            res.status(500).send('Something went wrong!')
+        }
     },
 
     post: {
-        register: (req, res, next) => {
-            const { email, password } = req.body;
-            User.create({ email, password })
-                .then((createdUser) => {
-                    const token = createToken({ id: createdUser._id })
-                    res.header("Authorization", token).send(createdUser)
-                })
-                .catch(next)
-        },
-
-        login: (req, res, next) => {
+        register: async (req, res, next) => {
             const { email, password } = req.body
-            User.findOne({ email }).populate('savedArticles')
-                .then((user) => Promise.all([user, user.matchPassword(password)]))
-                .then(([user, match]) => {
-                    if (!match) {
-                        res.status(500).send('Wrong email or password!')
-                        return
-                    }
-                    const token = createToken({ id: user._id })
-                    res.header("Authorization", token).send(user)
-                })
-                .catch(next)
+            try {
+                const user = await User.create({ email, password })
+                const token = await createToken({ id: user._id })
+                res.header("Authorization", token).send(user)
+            } catch (error) {
+                res.status(500).send('Something went wrong!')
+            }
         },
 
-        verifyToken: (req, res, next) => {
-            const token = req.get('Authorization') || '';
-            verifyToken(token)
-                .then(response => {
-                    User.findById(response.id).populate('savedArticles')
-                        .then((user) => {
-                            if (user === null) throw new Error("User not found")
-                            res.send({ status: true, user })
-                        }).catch(err => {
-                            res.send({ status: false })
-                        })
-                })
-                .catch(err => {
-                    res.send({ status: false })
-                })
+        login: async (req, res, next) => {
+            const { email, password } = req.body
+            try {
+                const user = await User.findOne({ email }).populate('savedArticles')
+                const match = await user.matchPassword(password)
+                if (!match) {
+                    return res.status(500).send('Wrong email or password!')
+                }
+                const token = createToken({ id: user._id })
+                res.header("Authorization", token).status(200).send(user)
+            } catch (error) {
+                res.status(500).send('Wrong email or password!')
+            }
+        },
+
+        verifyToken: async (req, res, next) => {
+            const token = req.get('Authorization') || ''
+            try {
+                const response = await verifyToken(token)
+                const user = await User.findById(response.id).populate('savedArticles')
+                res.status(200).send(user)
+            } catch (error) {
+                res.status(200)
+            }
         },
     },
 

@@ -28,7 +28,6 @@ module.exports = {
                 const article = await Article.create({ ...req.body })
                 res.status(201).send(article)
             } catch (error) {
-                // validation some other error
                 res.status(500).send('Something went wrong!')
             }
         }

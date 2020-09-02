@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box'
 import PageLayout from '../PageLayout'
 import Typography from '../../components/typography/Typography'
 import Loading from '../../components/loading/Loading'
-// import Error from '../../components/messages/Error'
 import CommentsButton from '../../components/commentsButton/CommentsButton'
 import Top from './top/Top'
 import Image from '../../components/imagesCloudinary/Image'
@@ -15,14 +14,11 @@ import CommentSection from './commentSection/CommentSection'
 import { getArticle, changeToggle, cleanArticleState } from '../../store/actions/index'
 
 const ArticlePage = (props) => {
-    const params = useParams()
-    const data = useSelector(state => state.article.data)
-    const loading = useSelector(state => state.article.loading)
-    // const error = useSelector(state => state.article.error)
-    const isAuth = useSelector(state => state.auth.token !== null)
-    const toggle = useSelector(state => state.article.toggle)
-    const update = useSelector(state => state.article.update)
+    const { data, loading, error, toggle, update } = useSelector(state => state.article)
+    const isAuth = useSelector(state => state.auth.id)
     const dispatch = useDispatch()
+    const params = useParams()
+    document.title = data !== null ? data.title : 'Sports News | Loading...'
 
     useEffect(() => {
         return function cleanup() {
@@ -32,25 +28,30 @@ const ArticlePage = (props) => {
 
     useEffect(() => {
         dispatch(getArticle(params.id))
-    }, [update, dispatch, params.id])
+    }, [dispatch, params.id, update])
+
+    const renderArticle = (article) => {
+        return (
+            <Fragment>
+                <Top text={article.category} />
+                <Typography type='h2' text={article.title} />
+                <Box mb={2}>
+                    <Image imageUrl={article.imageUrl} />
+                </Box>
+                <Content content={article.content} createdAt={article.createdAt} author={article.author} clicks={article.clicks} />
+                {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
+                {toggle ?
+                    <Fragment>
+                        <PostComment />
+                        <CommentSection comments={article.comments} />
+                    </Fragment> : null}
+            </Fragment>
+        )
+    }
 
     return (
         <PageLayout>
-            {(loading || data === null) ? <Loading /> :
-                <Fragment>
-                    <Top text={data.category} />
-                    <Typography type='h2' text={data.title} />
-                    <Box mb={2}>
-                        <Image imageUrl={data.imageUrl} />
-                    </Box>
-                    <Content data={data} />
-                    {isAuth ? <CommentsButton toggle={toggle} onClick={() => dispatch(changeToggle())} /> : null}
-                    {toggle ?
-                        <Fragment>
-                            <PostComment />
-                            <CommentSection comments={data.comments} />
-                        </Fragment> : null}
-                </Fragment>}
+            {(loading || error) ? <Loading /> : renderArticle(data)}
         </PageLayout>
     )
 }

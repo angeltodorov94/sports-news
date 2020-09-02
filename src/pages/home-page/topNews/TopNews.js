@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TopNews = (props) => {
     const classes = useStyles()
-    const data = useSelector(state => state.articles.top4articles.data)
+    const { data, loading, error } = useSelector(state => state.articles.top4articles)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const TopNews = (props) => {
         <Box>
             <Typography type='h2' text="Top News" />
             <Grid container spacing={3} className={classes.root}>
-                {data.length === 0 ? <Loading /> : renderCards(data)}
+                {(loading || error) ? <Loading /> : renderCards(data)}
             </Grid>
             <Typography type='body' position='right'>
                 <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>

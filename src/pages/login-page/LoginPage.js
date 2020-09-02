@@ -10,9 +10,9 @@ import { validation } from '../../utils/form-validations'
 import { authenticationInit } from '../../store/actions/index'
 
 const LoginPage = (props) => {
+    document.title = 'Sports News | Login Page'
     const [email, setEmail] = useState({ value: '', error: null })
     const [password, setPassword] = useState({ value: '', error: null })
-
     const error = useSelector(state => state.auth.error)
     const dispatch = useDispatch()
 
@@ -21,15 +21,15 @@ const LoginPage = (props) => {
         if (email.error !== null || password.error !== null)
             return
 
-        dispatch(authenticationInit(email.value, password.value, 'login'))
+        dispatch(authenticationInit({ email: email.value, password: password.value }, 'login'))
     }
 
     return (
         <PageLayout>
-            {error ? <ErrorMessage error={error} /> : null}
-            <Typography type='h2' text="Login" position="center" />
             <Container maxWidth='sm'>
-                <form onSubmit={onSubmitHandler}>
+                {error ? <ErrorMessage error={error} /> : null}
+                <Typography type='h2' text="Login" position="center" />
+                <form onSubmit={onSubmitHandler} noValidate>
                     <Input type='email' text='Email' error={email.error} name='email' value={email.value}
                         onChange={(e) => setEmail({ ...email, value: e.target.value })}
                         onBlur={(e) => setEmail(validation('email', email.value))}

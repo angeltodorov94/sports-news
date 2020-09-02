@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
-    token: null,
     id: null,
     isAdmin: null,
     loading: true,
@@ -19,7 +18,6 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_SUCCESS:
             return {
                 ...state,
-                token: action.token,
                 id: action.id,
                 isAdmin: action.isAdmin,
                 loading: false,

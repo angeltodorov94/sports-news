@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const controllers = require('../controllers/')
-const { isAdmin, isAuth } = require('../utils/auth')
+const { isAdmin, isAuth } = require('../middlewares/auth')
+const validationResult = require('../middlewares/validationResult')
+const { articleCheck } = require('../middlewares/validators')
 
 router.get('/article', isAuth, isAdmin, controllers.admin.get.article)
 
-router.post('/article', isAuth, isAdmin, controllers.admin.post.article)
+router.post('/article', [isAuth, isAdmin, articleCheck, validationResult], controllers.admin.post.article)
 
 router.delete('/article/:id', isAuth, isAdmin, controllers.admin.delete.article)
 

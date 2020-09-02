@@ -2,28 +2,43 @@ import * as actionTypes from './actionTypes'
 import { getUserInformationSuccess } from './index'
 import axios from 'axios'
 
-export const authenticationInit = (email, password, action) => {
+export const authenticationInit = (data, action) => {
     return dispatch => {
         dispatch(authStart())
-        axios.post(`http://localhost:9999/api/user/${action}`, { email, password })
+        axios.post(`http://localhost:9999/api/user/${action}`, data)
             .then(response => {
-                if (response.status === 500) {
-                    if (action === 'register')
-                        throw new Error('The email is already taken!')
-                    if (action === 'login')
-                        throw new Error('Wrong email or password!')
-                }
                 const token = response.headers["authorization"]
                 const expirationDate = new Date(new Date().getTime() + 3600 * 24 * 7 * 1000)
                 localStorage.setItem('x-auth-token', token)
                 localStorage.setItem('expiration-date', expirationDate)
-                dispatch(authSuccess(token, { id: response.data._id, isAdmin: response.data.isAdmin }))
+                dispatch(authSuccess({ id: response.data._id, isAdmin: response.data.isAdmin }))
                 dispatch(getUserInformationSuccess(response.data))
             }).catch(err => {
-                dispatch(authFailed(err.message))
+                dispatch(authFailed(err.response.data))
                 setTimeout(() => {
                     dispatch(removeError())
                 }, 3000)
+            })
+    }
+}
+
+export const checkAuthenticationStatus = () => {
+    return dispatch => {
+        const expiration_date = localStorage.getItem('expiration-date')
+        const expTime = new Date(expiration_date)
+
+        if (expiration_date === null || expTime < new Date())
+            return dispatch(logout())
+
+        axios.post(`http://localhost:9999/api/user/verifyToken`)
+            .then(response => {
+                if (!response.data) {
+                    return dispatch(logout())
+                }
+
+                dispatch(getUserInformationSuccess(response.data))
+                dispatch(authSuccess({ id: response.data._id, isAdmin: response.data.isAdmin }))
+                dispatch(checkAuthTimeout((expTime.getTime() - new Date().getTime()) / 1000))
             })
     }
 }
@@ -37,34 +52,11 @@ export const logout = () => {
     }
 }
 
-export const checkAuthenticationStatus = () => {
-    return dispatch => {
-        const token = localStorage.getItem('x-auth-token')
-        const expTime = new Date(localStorage.getItem('expiration-date'))
-        if (!token || expTime < new Date()) {
-            dispatch(logout())
-        }
-        else {
-            axios.post(`http://localhost:9999/api/user/verifyToken`)
-                .then(response => {
-                    if (response.data.status === false)
-                        dispatch(logout())
-                    else {
-                        dispatch(getUserInformationSuccess(response.data.user))
-                        dispatch(authSuccess(token, { id: response.data.user._id, isAdmin: response.data.user.isAdmin }))
-                        dispatch(checkAuthTimeout((expTime.getTime() - new Date().getTime()) / 1000))
-                    }
-                })
-        }
-    }
-}
-
 // ----------------------------------------
 
-const authSuccess = (token, userData) => {
+const authSuccess = (userData) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        token,
         id: userData.id,
         isAdmin: userData.isAdmin
     }

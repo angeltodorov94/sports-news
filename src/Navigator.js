@@ -22,7 +22,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const Navigator = () => {
   const isAdmin = useSelector(state => state.auth.isAdmin)
-  const isAuth = useSelector(state => state.auth.token !== null)
+  const isAuth = useSelector(state => state.auth.id)
   const dispatch = useDispatch()
 
   useEffect(() => {

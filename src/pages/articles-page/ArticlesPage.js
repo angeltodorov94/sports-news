@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import Pagination from '@material-ui/lab/Pagination'
 import PageLayout from '../PageLayout'
 import Loading from '../../components/loading/Loading'
@@ -11,24 +11,25 @@ import HorizontalCard from '../../components/card/HorizontalCard'
 import { categoriesObj } from '../../utils/navigations'
 
 const BrowsePage = (props) => {
-    const data = useSelector(state => state.articles.articles.data)
-    const count = useSelector(state => state.articles.articles.count)
-    const loading = useSelector(state => state.articles.articles.loading)
+    const { data, count, loading, error } = useSelector(state => state.articles.articles)
     const [title, setTitle] = useState('Recent Articles')
-
     const dispatch = useDispatch()
     const history = useHistory()
-    const search = history.location.search
+    const pathname = useLocation().pathname
+    const search = useLocation().search
+    const query = new URLSearchParams(search)
+    const category = query.get('category')
+    document.title = `Sports News | ${title}`
 
     useEffect(() => {
-        if (search.length > 0 && search.includes('category')) {
-            const category = search.match(/category=[a-zA-Z0-9- ]+/)[0].split('=')[1]
-            setTitle(categoriesObj[category].name)
-        }
-        else setTitle('Recent Articles')
-
         dispatch(getRecentNews(search))
     }, [dispatch, search])
+
+    useEffect(() => {
+        if (category)
+            setTitle(categoriesObj[category].name)
+        else setTitle('Recent Articles')
+    }, [category])
 
     const renderCards = (articles) => {
         if (articles.length === 0)
@@ -38,16 +39,14 @@ const BrowsePage = (props) => {
     }
 
     const onChange = (e, page) => {
-        let url = history.location.pathname
-        if (!search.includes('page')) url += `${(search ? (search + '&') : '?')}page=${page}`
-        else url += search.replace(/page=[0-9]+/, 'page=' + page)
-        history.push(url)
+        query.set('page', page)
+        history.push(`${pathname}?${query.toString()}`)
     }
 
     return (
         <PageLayout>
             <Typography type='h2' text={title} />
-            {loading ? <Loading /> : renderCards(data)}
+            {(loading || error) ? <Loading /> : renderCards(data)}
             {count > 0 ? <Pagination count={Math.ceil(count / 10)} shape='rounded' onChange={onChange} /> : null}
         </PageLayout>
     )

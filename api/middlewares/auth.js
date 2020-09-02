@@ -1,4 +1,4 @@
-const { verifyToken } = require('./jwt')
+const { verifyToken } = require('../utils/jwt')
 const User = require('../models/User')
 
 const isGuest = async (req, res, next) => {

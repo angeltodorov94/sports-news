@@ -8,12 +8,13 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme) => ({
     icon: {
         fontSize: '256px',
-        color: 'white'
+        color: '#272121'
     }
 }))
 
 const ErrorPage = (props) => {
     const classes = useStyles()
+    document.title = 'Sports News | Page Not Found'
 
     return (
         <PageLayout>

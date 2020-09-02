@@ -4,13 +4,11 @@ const bcrypt = require('bcrypt')
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        match: [/\S+@\S+\.\S+/, 'Email is not valid!'],
         required: true,
         unique: true
     },
     password: {
         type: String,
-        match: [/[a-zA-Z0-9]+/, 'Password is not valid!'],
         minlength: 8,
         required: true
     },

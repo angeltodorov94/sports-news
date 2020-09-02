@@ -1,6 +1,6 @@
 const controllers = require('../controllers/')
 const router = require('express').Router()
-const { isAuth } = require('../utils/auth')
+const { isAuth } = require('../middlewares/auth')
 
 router.post('/', isAuth, controllers.comment.post)
 

@@ -52,13 +52,13 @@ const getRecentNewsSuccess = (articles) => {
 const getTopNewsError = () => {
     return {
         type: actionTypes.GET_TOP_NEWS_FAILED,
-        err: "Something Went Wrong!"
+        err: 'Something Went Wrong!'
     }
 }
 
 const getRecentNewsError = () => {
     return {
         type: actionTypes.GET_RECENT_NEWS_FAILED,
-        err: "Something Went Wrong!"
+        err: 'Something Went Wrong!'
     }
 }

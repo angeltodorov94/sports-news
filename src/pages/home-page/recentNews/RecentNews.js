@@ -8,7 +8,7 @@ import { getRecentNews } from '../../../store/actions/index'
 import HorizontalCard from '../../../components/card/HorizontalCard'
 
 const RecentNews = (props) => {
-    const data = useSelector(state => state.articles.articles.data)
+    const { data, loading, error } = useSelector(state => state.articles.articles)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const RecentNews = (props) => {
         <Box>
             <Typography type='h2' text="Recent News" />
             <Box>
-                {data.length === 0 ? <Loading /> : renderCards(data)}
+                {(loading || error) ? <Loading /> : renderCards(data)}
             </Box>
             <Typography type='body' position='right'>
                 <Link to="/articles" component={RouterLink} align='right' style={{ color: '#272121' }}>See more</Link>

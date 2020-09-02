@@ -27,10 +27,10 @@ const HorizontalCard = ({ id, title, imageUrl }) => {
 
     return (
         <Grid container spacing={2} className={classes.root}>
-            <Grid item xs={4} className={classes.picture}>
+            <Grid item xs={4}>
                 <Image imageUrl={imageUrl} />
             </Grid>
-            <Grid container item xs={8} className={classes.inner} alignItems='center'>
+            <Grid container item xs={8} alignItems='center'>
                 <Link component={RouterLink} to={`/articles/${id}`} underline='none' className={classes.link}>
                     {title}
                 </Link>

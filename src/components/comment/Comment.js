@@ -33,11 +33,11 @@ const Comment = ({ data }) => {
     const onClickHandler = () => {
         dispatch(deleteComment(params.id, data._id))
     }
-    console.log(data)
+
     return (
         <Paper variant="outlined" className={classes.paper}>
             <Box mr={2}>
-                <ProfileImage image={data.author !== null ? data.author.profilePicture : '/hwzwsxu3qi2ukhhmpyh4'} size={64} />
+                <ProfileImage image={data.author !== null ? data.author.profilePicture : '/cs5r1hymw0fxypw6pivd'} size={64} />
             </Box>
             <Box width={1}>
                 <Box component='div' display="flex" justifyContent="space-between" mb={1}>

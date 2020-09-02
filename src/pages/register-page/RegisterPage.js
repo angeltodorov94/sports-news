@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { authenticationInit } from '../../store/actions/index'
 
 const RegisterPage = (props) => {
+    document.title = 'Sports News | Register Page'
     const [email, setEmail] = useState({ value: '', error: null })
     const [password, setPassword] = useState({ value: '', error: null })
     const [rePassword, setRePassword] = useState({ value: '', error: null })
@@ -27,15 +28,15 @@ const RegisterPage = (props) => {
         if (email.error !== null || password.error !== null || rePassword.error !== null)
             return
 
-        dispatch(authenticationInit(email.value, password.value, 'register'))
+        dispatch(authenticationInit({ email: email.value, password: password.value, rePassword: rePassword.value }, 'register'))
     }
 
     return (
         <PageLayout>
-            {error ? <ErrorMessage error={error} /> : null}
-            <Typography type='h2' text="Register" position="center" />
             <Container maxWidth='sm'>
-                <form onSubmit={onSubmitHandler}>
+                {error ? <ErrorMessage error={error} /> : null}
+                <Typography type='h2' text="Register" position="center" />
+                <form onSubmit={onSubmitHandler} noValidate>
                     <Input type='email' text='Email' name='email' error={email.error} value={email.value}
                         onChange={(e) => setEmail({ ...email, value: e.target.value })}
                         onBlur={(e) => setEmail(validation('email', email.value))} />

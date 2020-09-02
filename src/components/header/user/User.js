@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box'
 import { useSelector } from 'react-redux'
 
 const RightSide = (props) => {
-    const isAuth = useSelector(state => state.auth.token) !== null
+    const isAuth = useSelector(state => state.auth.id)
     const isAdmin = useSelector(state => state.auth.isAdmin)
 
     return (

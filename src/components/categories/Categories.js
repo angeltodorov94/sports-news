@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         borderRadius: '0',
         width: '100%',
+        color: 'white',
         backgroundColor: '#e16428',
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
@@ -26,7 +27,6 @@ const Categories = (props) => {
             <Grid item key={x.value} xs={true}>
                 <Button
                     variant="contained"
-                    color="primary"
                     className={classes.button}
                     component={RouterLink}
                     to={`/articles?category=${x.value}`}
@@ -44,7 +44,6 @@ const Categories = (props) => {
             <Grid item xs={true}>
                 <Button
                     variant="contained"
-                    color="primary"
                     size='large'
                     className={classes.button}
                     component={RouterLink}

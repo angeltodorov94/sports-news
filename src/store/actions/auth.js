@@ -25,21 +25,18 @@ export const authenticationInit = (data, action) => {
 export const checkAuthenticationStatus = () => {
     return dispatch => {
         const expiration_date = localStorage.getItem('expiration-date')
-        const expTime = new Date(expiration_date)
-
-        if (expiration_date === null || expTime < new Date())
+        if (expiration_date < new Date())
             return dispatch(logout())
 
         axios.post(`http://localhost:9999/api/user/verifyToken`)
             .then(response => {
-                if (!response.data) {
+                if (response.data === '')
                     return dispatch(logout())
-                }
 
                 dispatch(getUserInformationSuccess(response.data))
                 dispatch(authSuccess({ id: response.data._id, isAdmin: response.data.isAdmin }))
-                dispatch(checkAuthTimeout((expTime.getTime() - new Date().getTime()) / 1000))
-            })
+                dispatch(checkAuthTimeout((expiration_date.getTime() - new Date().getTime()) / 1000))
+            }).catch(err => console.log(err))
     }
 }
 
